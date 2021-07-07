@@ -1,14 +1,15 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Pengguna extends Render_Controller {
+class Pengguna extends Render_Controller
+{
 
 
 	public function index()
 	{
 		// Page Settings
 		$this->title 					= 'Pengaturan Pengguna';
-		$this->content 					= 'pengaturan-pengguna';
+		$this->content 					= 'pengaturan/pengguna';
 		$this->navigation 				= ['Pengaturan', 'Pengguna'];
 		$this->plugins 					= ['datatables'];
 
@@ -36,14 +37,15 @@ class Pengguna extends Render_Controller {
 		$exe 						= $this->pengguna->getDataDetail($id);
 
 		$this->output_json(
-		[
-			'id' 			=> $exe['role_user_id'],
-			'level' 		=> $exe['role_lev_id'],
-			'nama' 			=> $exe['user_nama'],
-			'phone' 		=> $exe['user_phone'],
-			'username' 		=> $exe['user_email'],
-			'status' 		=> $exe['user_status'],
-		]);
+			[
+				'id' 			=> $exe['role_user_id'],
+				'level' 		=> $exe['role_lev_id'],
+				'nama' 			=> $exe['user_nama'],
+				'phone' 		=> $exe['user_phone'],
+				'username' 		=> $exe['user_email'],
+				'status' 		=> $exe['user_status'],
+			]
+		);
 	}
 
 
@@ -56,19 +58,20 @@ class Pengguna extends Render_Controller {
 		$username 					= $this->input->post('username');
 		$status 					= $this->input->post('status');
 		$password 					= $this->input->post('password');
-		$password 					= $this->b_password->create_hash($password);
+		$password 					= $this->b_password->bcrypt_hash($password);
 
 		$exe 						= $this->pengguna->insert($level, $nama, $telepon, $username, $password, $status);
 
 		$this->output_json(
-		[
-			'id' 			=> $exe['id'],
-			'level' 		=> $exe['level'],
-			'username' 		=> $username,
-			'nama' 			=> $nama,
-			'telepon' 		=> $telepon,
-			'status' 		=> $status,
-		]);
+			[
+				'id' 			=> $exe['id'],
+				'level' 		=> $exe['level'],
+				'username' 		=> $username,
+				'nama' 			=> $nama,
+				'telepon' 		=> $telepon,
+				'status' 		=> $status,
+			]
+		);
 	}
 
 
@@ -82,19 +85,20 @@ class Pengguna extends Render_Controller {
 		$username 					= $this->input->post('username');
 		$status 					= $this->input->post('status');
 		$password 					= $this->input->post('password');
-		$password 					= $this->b_password->create_hash($password);
+		$password 					= $this->b_password->bcrypt_hash($password);
 
 		$exe 						= $this->pengguna->update($id, $level, $nama, $telepon, $username, $password, $status);
 
 		$this->output_json(
-		[
-			'id' 			=> $id,
-			'level' 		=> $exe['level'],
-			'username' 		=> $username,
-			'nama' 			=> $nama,
-			'telepon' 		=> $telepon,
-			'status' 		=> $status,
-		]);
+			[
+				'id' 			=> $id,
+				'level' 		=> $exe['level'],
+				'username' 		=> $username,
+				'nama' 			=> $nama,
+				'telepon' 		=> $telepon,
+				'status' 		=> $status,
+			]
+		);
 	}
 
 
@@ -106,9 +110,10 @@ class Pengguna extends Render_Controller {
 		$exe 							= $this->pengguna->delete($id);
 
 		$this->output_json(
-		[
-			'id' 			=> $id
-		]);
+			[
+				'id' 			=> $id
+			]
+		);
 	}
 
 
@@ -123,8 +128,6 @@ class Pengguna extends Render_Controller {
 		// Cek session
 		$this->sesion->cek_session();
 	}
-
-
 }
 
 /* End of file Pengguna.php */

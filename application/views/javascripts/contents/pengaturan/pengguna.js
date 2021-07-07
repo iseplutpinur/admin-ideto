@@ -11,15 +11,13 @@ $(document).ready(function () {
     // Add Row
     const addRow = (data) => {
         let row = [
-            data.parent,
+            data.level,
+            data.username,
             data.nama,
-            data.keterangan,
-            data.index,
-            '<i class="' + data.icon + '"></i> ' + data.icon,
-            data.url,
+            data.telepon,
             data.status,
             '<div>'
-            + '<button class="btn btn-primary btn-sm  mr-1" onclick="Ubah(' + data.id + ')"><i class="fa fa-edit"></i> Ubah</button>'
+            + '<button class="btn btn-primary btn-sm mr-1" onclick="Ubah(' + data.id + ')"><i class="fa fa-edit"></i> Ubah</button>'
             + '<button class="btn btn-danger btn-sm" onclick="Hapus(' + data.id + ')"><i class="fa fa-trash"></i> Hapus</button>'
             + '</div>'
         ]
@@ -28,13 +26,115 @@ $(document).ready(function () {
         $node.attr('data-id', data.id)
     }
 
+    // Edit Row
+    const editRow = (id, data) => {
+        let row = $table.row('[data-id=' + id + ']').index()
+
+        $($table.row(row).node()).attr('data-id', id)
+        $table.cell(row, 0).data(data.level)
+        $table.cell(row, 1).data(data.username)
+        $table.cell(row, 2).data(data.nama)
+        $table.cell(row, 3).data(data.telepon)
+        $table.cell(row, 4).data(data.status)
+    }
+
+    // Delete Row
+    const deleteRow = (id) => {
+        $table.row('[data-id=' + id + ']').remove().draw()
+    }
+
+
+
+
+
+    // Ulang password
+    $('#upassword').on('change', () => {
+        let password = $('#password').val()
+        let upassword = $('#upassword').val()
+
+        if (upassword != password) {
+            Toast.fire({
+                icon: 'error',
+                title: 'Password tidak sama.'
+            })
+            $('#submit').prop('disabled', 'disabled')
+        }
+        else {
+            Toast.fire({
+                icon: 'success',
+                title: 'Password sama.'
+            })
+            $('#submit').prop('disabled', false)
+        }
+    })
+
+    // Fungsi simpan
+    $('#form').submit((ev) => {
+        ev.preventDefault()
+
+        let id = $('#id').val()
+        let level = $('#level').val()
+        let nama = $('#nama').val()
+        let telepon = $('#phone').val()
+        let username = $('#username').val()
+        let password = $('#password').val()
+        let status = $('#status').val()
+
+        if (id == 0) {
+
+            // Insert
+            $.LoadingOverlay("show");
+            window.apiClient.pengaturanPengguna.insert(level, nama, telepon, username, password, status)
+                .done((data) => {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Berhasil ditambahkan.'
+                    })
+                    addRow(data)
+                })
+                .fail(($xhr) => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Gagal ditambahkan.'
+                    })
+                }).
+                always(() => {
+                    $('#myModal').modal('toggle')
+                    $.LoadingOverlay("hide");
+                })
+        }
+        else {
+
+            // Update
+            $.LoadingOverlay("show");
+            window.apiClient.pengaturanPengguna.update(id, level, nama, telepon, username, password, status)
+                .done((data) => {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Berhasil diubah.'
+                    })
+                    editRow(id, data)
+
+                })
+                .fail(($xhr) => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Gagal Diubah..'
+                    })
+                }).
+                always(() => {
+                    $('#myModal').modal('toggle')
+                    $.LoadingOverlay("hide");
+                })
+        }
+    })
 
     // Fungsi Delete
     $('#OkCheck').click(() => {
         $.LoadingOverlay("show");
         let id = $("#idCheck").val()
 
-        window.apiClient.pengaturanMenu.delete(id)
+        window.apiClient.pengaturanPengguna.delete(id)
             .done((data) => {
                 Toast.fire({
                     icon: 'success',
@@ -55,113 +155,45 @@ $(document).ready(function () {
             })
     })
 
-    // Edit Row
-    const editRow = (id, data) => {
-        let row = $table.row('[data-id=' + id + ']').index()
-
-        $($table.row(row).node()).attr('data-id', id)
-        $table.cell(row, 0).data(data.parent)
-        $table.cell(row, 1).data(data.nama)
-        $table.cell(row, 2).data(data.keterangan)
-        $table.cell(row, 3).data(data.index)
-        $table.cell(row, 4).data('<i class="' + data.icon + '"></i> ' + data.icon)
-        $table.cell(row, 5).data(data.url)
-        $table.cell(row, 6).data(data.status)
-    }
-
-    // Delete Row
-    const deleteRow = (id) => {
-        $table.row('[data-id=' + id + ']').remove().draw()
-    }
-
-    // Fungsi simpan
-    $('#form-tambah').submit((ev) => {
-        ev.preventDefault()
-
-        let id = $('#id').val()
-        let menu_menu_id = $('#menu_menu_id').val()
-        let nama = $('#nama').val()
-        let index = $('#index').val()
-        let icon = $('#icon').val()
-        let url = $('#url').val()
-        let keterangan = $('#keterangan').val()
-        let status = $('#status').val()
-
-        if (id == "") {
-            // Insert
-            $.LoadingOverlay("show");
-            window.apiClient.pengaturanMenu.insert(menu_menu_id, nama, index, icon, url, keterangan, status)
-                .done((data) => {
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Berhasil ditambahkan.'
-                    })
-                    addRow(data)
-                })
-                .fail(($xhr) => {
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'Gagal ditambahkan.'
-                    })
-                }).
-                always(() => {
-                    $('#modal').modal('toggle')
-                    $.LoadingOverlay("hide");
-                })
-        }
-        else {
-            // Update
-            $.LoadingOverlay("show");
-            window.apiClient.pengaturanMenu.update(id, menu_menu_id, nama, index, icon, url, keterangan, status)
-                .done((data) => {
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Berhasil diubah.'
-                    })
-                    editRow(id, data)
-
-                })
-                .fail(($xhr) => {
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'Gagal Diubah..'
-                    })
-                }).
-                always(() => {
-                    $('#modal').modal('toggle')
-                    $.LoadingOverlay("hide");
-                })
-        }
-    })
-
     // Clik Tambah
     $('#btn-tambah').on('click', () => {
-        $('#modal-title').html('Tambah Menu')
+        $('#myModalLabel').html('Tambah Pengguna')
         $('#id').val('')
-        $('#menu_menu_id').val('')
+        $('#level').val('')
         $('#nama').val('')
-        $('#index').val('')
-        $('#icon').val('')
-        $('#url').val('')
-        $('#keterangan').val('')
+        $('#phone').val('')
+        $('#username').val('')
+        $('#password').val('')
+        $('#upassword').val('')
         $('#status').val('')
+
+        $('#myModal').modal('toggle')
     })
+
 })
 
+// Click Hapus
+const Hapus = (id) => {
+    $("#idCheck").val(id)
+    $("#LabelCheck").text('Form Hapus')
+    $("#ContentCheck").text('Apakah anda yakin akan menghapus data ini?')
+    $('#ModalCheck').modal('toggle')
+}
+
+// Click Ubah
 const Ubah = (id) => {
     // $.LoadingOverlay("show");
-    window.apiClient.pengaturanMenu.detail(id)
+    window.apiClient.pengaturanPengguna.detail(id)
         .done((data) => {
-            $('#modal-title').html('Ubah Menu')
+
+            $('#myModalLabel').html('Ubah Pengguna')
             $('#id').val(data.id)
-            $('#menu_menu_id').val(data.parent == 0 ? "" : data.parent)
+            $('#level').val(data.level)
             $('#nama').val(data.nama)
-            $('#index').val(data.index)
-            $('#icon').val(data.icon)
-            $('#url').val(data.url)
-            $('#keterangan').val(data.keterangan)
+            $('#phone').val(data.phone)
+            $('#username').val(data.username)
             $('#status').val(data.status)
-            $('#modal').modal('toggle')
+            $('#myModal').modal('toggle')
         })
         .fail(($xhr) => {
             Toast.fire({
@@ -172,11 +204,4 @@ const Ubah = (id) => {
         .always(() => {
             // $.LoadingOverlay("hide");
         })
-}
-
-const Hapus = (id) => {
-    $("#idCheck").val(id)
-    $("#LabelCheck").text('Form Hapus')
-    $("#ContentCheck").text('Apakah anda yakin akan menghapus data ini?')
-    $('#ModalCheck').modal('toggle')
 }

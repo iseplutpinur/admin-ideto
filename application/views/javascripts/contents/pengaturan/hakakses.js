@@ -15,7 +15,7 @@ $(document).ready(function () {
             data.menu,
             data.sub_menu,
             '<div>'
-            + '<button class="btn btn-primary btn-sm" onclick="Ubah(' + data.id + ')"><i class="fa fa-edit"></i> Ubah</button>'
+            + '<button class="btn btn-primary btn-sm  mr-1" onclick="Ubah(' + data.id + ')"><i class="fa fa-edit"></i> Ubah</button>'
             + '<button class="btn btn-danger btn-sm" onclick="Hapus(' + data.id + ')"><i class="fa fa-trash"></i> Hapus</button>'
             + '</div>'
         ]
@@ -143,7 +143,7 @@ $(document).ready(function () {
     })
 
     // Clik Tambah
-    $('#tambah').on('click', () => {
+    $('#btn-tambah').on('click', () => {
         $('#myModalLabel').html('Tambah Hak Akses')
         $('#id').val('')
         $('#menu').val('')
