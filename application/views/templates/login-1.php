@@ -34,6 +34,7 @@
 </head>
 
 <body class="hold-transition login-page">
+  <div id="loader"></div>
   <div class="login-box">
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
@@ -88,6 +89,8 @@
   <script src="<?= base_url('assets/template/') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
   <script src="<?= base_url('assets/template/') ?>dist/js/adminlte.min.js"></script>
+  <!-- loader -->
+  <script src="<?= base_url('assets/template/') ?>plugins/loader/loadingoverlay.min.js"></script>
   <!-- AdminLTE Validator -->
   <script>
     const base_url = '<?= base_url() ?>';

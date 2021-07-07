@@ -9,7 +9,7 @@ class Menu extends Render_Controller
 	{
 		// Page Settings
 		$this->title 					= 'Pengaturan Menu';
-		$this->content 					= 'pengaturan-menu';
+		$this->content 					= 'pengaturan/menu';
 		$this->navigation 				= ['Pengaturan', 'Menu'];
 		$this->plugins 					= ['datatables'];
 
