@@ -224,6 +224,24 @@
 			<!-- Default to the left -->
 			Copyright &copy; <?= $copyright ?>
 		</footer>
+		<!-- CHECK MODAL -->
+		<div class="modal fade" id="ModalCheck" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title custom-font" id="LabelCheck"></h3>
+					</div>
+					<div class="modal-body" id="ContentCheck">
+					</div>
+					<div class="modal-footer">
+						<button id="OkCheck" class="btn btn-success btn-ef btn-ef-3 btn-ef-3c"><i class="fa fa-arrow-right"></i> Ya</button>
+
+						<button class="btn btn-danger btn-ef btn-ef-4 btn-ef-4c" data-dismiss="modal"><i class="fa fa-arrow-left"></i> Tidak</button>
+					</div>
+					<input type="hidden" id="idCheck" name="">
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- ./wrapper -->
 

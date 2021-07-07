@@ -31,6 +31,16 @@ $config['validation'] = [
 
 $config['icheck'] = [
 	'styles' => [
-		'icheck-bootstrap/icheck-bootstrap.min.css'
+		'assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css'
+	]
+];
+
+$config['select2'] = [
+	'styles' => [
+		'assets/plugins/select2/css/select2.min.css',
+		'assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css'
+	],
+	'scripts' => [
+		'assets/plugins/select2/js/select2.min.js',
 	]
 ];
