@@ -1,14 +1,15 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class HakAkses extends Render_Controller {
+class HakAkses extends Render_Controller
+{
 
 
 	public function index()
 	{
 		// Page Settings
 		$this->title 					= 'Pengaturan Hak Akses';
-		$this->content 					= 'pengaturan-hakAkses';
+		$this->content 					= 'pengaturan/hakakses';
 		$this->navigation 				= ['Pengaturan', 'Hak Akses'];
 		$this->plugins 					= ['datatables'];
 
@@ -48,12 +49,13 @@ class HakAkses extends Render_Controller {
 		$exe 							= $this->hakAkses->getAllData($id);
 
 		$this->output_json(
-		[
-			'id' 			=> $exe[0]['rola_id'],
-			'level' 		=> $exe[0]['rola_lev_id'],
-			'menu' 			=> $exe[0]['parent_id'],
-			'sub_menu' 		=> $exe[0]['menu_id'],
-		]);
+			[
+				'id' 			=> $exe[0]['rola_id'],
+				'level' 		=> $exe[0]['rola_lev_id'],
+				'menu' 			=> $exe[0]['parent_id'],
+				'sub_menu' 		=> $exe[0]['menu_id'],
+			]
+		);
 	}
 
 
@@ -67,12 +69,13 @@ class HakAkses extends Render_Controller {
 		$exe 							= $this->hakAkses->insert($level, $menu, $sub_menu);
 
 		$this->output_json(
-		[
-			'id' 			=> $exe['id'],
-			'level' 		=> $exe['level'],
-			'menu' 			=> $exe['parent'],
-			'sub_menu' 		=> $exe['child'],
-		]);
+			[
+				'id' 			=> $exe['id'],
+				'level' 		=> $exe['level'],
+				'menu' 			=> $exe['parent'],
+				'sub_menu' 		=> $exe['child'],
+			]
+		);
 	}
 
 
@@ -87,12 +90,13 @@ class HakAkses extends Render_Controller {
 		$exe 							= $this->hakAkses->update($id, $level, $menu, $sub_menu);
 
 		$this->output_json(
-		[
-			'id' 			=> $id,
-			'level' 		=> $exe['level'],
-			'menu' 			=> $exe['parent'],
-			'sub_menu' 		=> $exe['child'],
-		]);
+			[
+				'id' 			=> $id,
+				'level' 		=> $exe['level'],
+				'menu' 			=> $exe['parent'],
+				'sub_menu' 		=> $exe['child'],
+			]
+		);
 	}
 
 
@@ -104,9 +108,10 @@ class HakAkses extends Render_Controller {
 		$exe 							= $this->hakAkses->delete($id);
 
 		$this->output_json(
-		[
-			'id' 			=> $id
-		]);
+			[
+				'id' 			=> $id
+			]
+		);
 	}
 
 
@@ -121,8 +126,6 @@ class HakAkses extends Render_Controller {
 		// Cek session
 		$this->sesion->cek_session();
 	}
-
-
 }
 
 /* End of file HakAkses.php */

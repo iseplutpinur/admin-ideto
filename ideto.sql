@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2021 at 12:38 AM
+-- Generation Time: Jul 08, 2021 at 12:42 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -297,14 +297,10 @@ CREATE TABLE `menu` (
 INSERT INTO `menu` (`menu_id`, `menu_menu_id`, `menu_nama`, `menu_keterangan`, `menu_index`, `menu_icon`, `menu_url`, `menu_status`, `created_at`) VALUES
 (1, 0, 'Dashboard', '-', 1, 'fa fa-suitcase', 'dashboard', 'Aktif', '2020-06-18 09:40:07'),
 (2, 0, 'Pengaturan', '-', 10, 'fa fa-cogs', '#', 'Aktif', '2020-06-18 09:40:07'),
-(3, 2, 'Hak Akses', '-', 1, 'fa fa-caret-right', 'pengaturan/hakAkses', 'Aktif', '2020-06-18 09:40:07'),
-(4, 2, 'Menu', '-', 2, 'fa fa-caret-right', 'pengaturan/menu', 'Aktif', '2020-06-18 09:40:07'),
-(5, 2, 'Level', '-', 3, 'fa fa-caret-right', 'pengaturan/level', 'Aktif', '2020-06-18 09:40:07'),
-(6, 2, 'Pengguna', '-', 4, 'fa fa-caret-right', 'pengaturan/pengguna', 'Aktif', '2020-06-18 09:40:07'),
-(38, 2, 'Periode', '-', 1, 'fa fa-caret-right', 'pengaturan/periode', 'Aktif', '2021-03-01 15:31:44'),
-(39, 2, 'Kurs', '-', 2, 'fa fa-caret-right', 'pengaturan/kurs', 'Aktif', '2021-03-01 15:32:01'),
-(46, 44, 'Pemasukan', '-', 2, 'fa fa-caret-right', 'saldo/pemasukan', 'Aktif', '2021-03-01 16:16:13'),
-(47, 44, 'Pengeluaran', '-', 3, 'fa fa-caret-right', 'saldo/pengeluaran', 'Aktif', '2021-03-01 16:16:34'),
+(3, 2, 'Hak Akses', '-', 1, 'far fa-circle', 'pengaturan/hakAkses', 'Aktif', '2020-06-18 09:40:07'),
+(4, 2, 'Menu', '-', 2, 'far fa-circle', 'pengaturan/menu', 'Aktif', '2020-06-18 09:40:07'),
+(5, 2, 'Level', '-', 3, 'far fa-circle', 'pengaturan/level', 'Aktif', '2020-06-18 09:40:07'),
+(6, 2, 'Pengguna', '-', 4, 'far fa-circle', 'pengaturan/pengguna', 'Aktif', '2020-06-18 09:40:07'),
 (64, 0, 'Ganti Password', 'Ganti password', 99, 'fa fa-key', 'pengaturan/password', 'Aktif', '2021-06-28 15:34:14');
 
 -- --------------------------------------------------------
