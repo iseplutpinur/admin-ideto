@@ -47,7 +47,7 @@
 	<div class="wrapper">
 		<div id="loader"></div>
 		<!-- preloader -->
-		<div class="preloader flex-column justify-content-center align-items-center">
+		<div class="preloader flex-column justify-content-center bg-dark align-items-center">
 			<img class="animation__shake" src="<?= base_url('assets/favicon/') ?>ms-icon-310x310.png" alt="IDETO.co.id Logo" height="60" width="60">
 		</div>
 		<!-- Navbar -->
@@ -56,6 +56,10 @@
 			<ul class="navbar-nav">
 				<li class="nav-item">
 					<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" href="<?= base_url() ?>" role="button">Dashboard</a>
 				</li>
 				<!-- <li class="nav-item d-none d-sm-inline-block">
 					<a href="index3.html" class="nav-link">Home</a>
@@ -308,10 +312,12 @@
 					$("body").addClass("dark-mode")
 					$("#nav-top").removeClass("navbar-white")
 					$("#nav-top").addClass("navbar-dark")
+					$(".preloader").addClass("bg-dark")
 					$("#dark-mode-switch-label").html('<i class="far fa-sun"></i>');
 				} else {
 					$("body").removeClass("dark-mode")
 					$("#nav-top").removeClass("navbar-dark")
+					$(".preloader").removeClass("bg-dark")
 					$("#nav-top").addClass("navbar-white")
 					$("#dark-mode-switch-label").html('<i class="far fa-moon"></i>');
 				}
