@@ -51,7 +51,7 @@
 			<img class="animation__shake" src="<?= base_url('assets/favicon/') ?>ms-icon-310x310.png" alt="IDETO.co.id Logo" height="60" width="60">
 		</div>
 		<!-- Navbar -->
-		<nav class="<?= $page_nav ?>">
+		<nav class="<?= $page_nav ?>" id="nav-top">
 			<!-- Left navbar links -->
 			<ul class="navbar-nav">
 				<li class="nav-item">
@@ -298,14 +298,25 @@
 			})
 
 			$("#dark-mode-switch").change(function() {
-				if (this.checked) {
+				setDarkMode(this.checked)
+			})
+
+			function setDarkMode(data) {
+				if (data) {
 					$("body").addClass("dark-mode")
+					$("#nav-top").removeClass("navbar-white")
+					$("#nav-top").addClass("navbar-dark")
 					$("#dark-mode-switch-label").html('<i class="far fa-sun"></i>');
 				} else {
 					$("body").removeClass("dark-mode")
+					$("#nav-top").removeClass("navbar-dark")
+					$("#nav-top").addClass("navbar-white")
 					$("#dark-mode-switch-label").html('<i class="far fa-moon"></i>');
 				}
-			})
+				localStorage.setItem('isDarkMode', data);
+				document.querySelector("#dark-mode-switch").checked = data;
+			}
+			setDarkMode(localStorage.getItem('isDarkMode'));
 		})
 	</script>
 </body>
