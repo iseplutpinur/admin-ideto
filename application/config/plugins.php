@@ -44,3 +44,12 @@ $config['select2'] = [
 		'assets/plugins/select2/js/select2.min.js',
 	]
 ];
+
+$config['summernote'] = [
+	'styles' => [
+		'assets/plugins/summernote/summernote-bs4.min.css'
+	],
+	'scripts' => [
+		'assets/plugins/summernote/summernote-bs4.min.js'
+	]
+];

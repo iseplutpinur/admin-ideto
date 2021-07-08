@@ -78,10 +78,11 @@ class Render_Controller extends CI_Controller
 	}
 
 
-	protected function output_json($data)
+	protected function output_json($data, $code = 200)
 	{
 		$this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode($data));
+		$this->output->set_status_header($code);
 	}
 
 
