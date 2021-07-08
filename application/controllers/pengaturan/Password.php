@@ -7,8 +7,10 @@ class Password extends Render_Controller
     {
         // Page Settings
         $this->title                    = 'Ganti Password';
-        $this->content                  = 'pengaturan-password-cabang';
+        $this->title_show               = false;
+        $this->content                  = 'pengaturan/password';
         $this->navigation               = ['Ganti Password'];
+        $this->plugins               = ['validation'];
 
         // Breadcrumb setting
         $this->breadcrumb_1             = 'Dashboard';
@@ -22,20 +24,22 @@ class Password extends Render_Controller
     // cek current password
     public function cek_password()
     {
-        $id_cabang = $this->input->post("id_cabang");
-        $id_cabang = ($id_cabang == null) ? $this->id_cabang : $id_cabang;
         $current_password = $this->input->post("current_password");
-        $result = $this->password->cekPpassword($id_cabang, $current_password);
+        $id_user = $this->input->post("id_user");
+        $id_user = ($id_user == null) ? $this->id_user : $id_user;
+
+        $result = $this->password->cekPpassword($id_user, $current_password);
         $this->output_json($result);
     }
 
     // update
     public function update_password()
     {
-        $id_cabang = $this->input->post("id_cabang");
-        $id_cabang = ($id_cabang == null) ? $this->id_cabang : $id_cabang;
         $new_password = $this->input->post("new_password");
-        $result = $this->password->updatePassword($id_cabang, $new_password);
+        $id_user = $this->input->post("id_user");
+        $id_user = ($id_user == null) ? $this->id_user : $id_user;
+
+        $result = $this->password->updatePassword($id_user, $new_password);
         $this->output_json($result);
     }
 
@@ -43,10 +47,9 @@ class Password extends Render_Controller
     {
         parent::__construct();
         $this->sesion->cek_session();
+        $this->id_user = $this->session->userdata('data')['id'];
         $this->default_template = 'templates/dashboard';
         $this->load->model("pengaturan/PasswordModel", 'password');
         $this->load->helper('url');
-        $this->cabangdetail = $this->db->get_where('cabangs', ['user_id' => $this->session->userdata('data')['id']])->row_array();
-        $this->id_cabang = $this->cabangdetail['id'];
     }
 }

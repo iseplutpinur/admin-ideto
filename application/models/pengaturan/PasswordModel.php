@@ -3,9 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class PasswordModel extends Render_Model
 {
-    public function cekPpassword($id_cabang, $current_password)
+    public function cekPpassword($id_user, $current_password)
     {
-        $password = $this->db->select("b.user_password")->from('cabangs a')->join("users b", "a.user_id = b.user_id")->where('a.id', $id_cabang)->get()->row_array();
+        $password = $this->db->select("a.user_password")
+            ->from('users a')
+            ->where('a.user_id', $id_user)
+            ->get()
+            ->row_array();
         if ($password == null) {
             $cek = false;
         } else {
@@ -14,17 +18,11 @@ class PasswordModel extends Render_Model
         return $cek;
     }
 
-    public function updatePassword($id_cabang, $new_password)
+    public function updatePassword($id_user, $new_password)
     {
-        $user = $this->db->select("b.user_id")->from('cabangs b')->where('b.id', $id_cabang)->get()->row_array();
-        if ($user == null) {
-            $cek = false;
-        } else {
-            // update action
-            $new_password_hash = $this->b_password->bcrypt_hash($new_password);
-            $this->db->where('user_id', $user['user_id']);
-            $cek = $this->db->update('users', ['user_password' => $new_password_hash]);
-        }
+        $new_password_hash = $this->b_password->bcrypt_hash($new_password);
+        $this->db->where('user_id', $id_user);
+        $cek = $this->db->update('users', ['user_password' => $new_password_hash]);
         return $cek;
     }
 }
