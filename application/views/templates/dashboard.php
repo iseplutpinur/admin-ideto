@@ -302,6 +302,8 @@
 			})
 
 			function setDarkMode(data) {
+				data = (typeof(data) == 'string') ? (data == 'false' ? false : true) : data;
+
 				if (data) {
 					$("body").addClass("dark-mode")
 					$("#nav-top").removeClass("navbar-white")
