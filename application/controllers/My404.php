@@ -3,7 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class My404 extends Render_Controller
 {
-
 	public function index()
 	{
 		// Page config:
