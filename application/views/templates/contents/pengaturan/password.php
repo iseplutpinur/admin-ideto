@@ -1,6 +1,6 @@
         <div class="row">
             <!-- left column -->
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <!-- jquery validation -->
                 <div class="card card-info">
                     <div class="card-header">

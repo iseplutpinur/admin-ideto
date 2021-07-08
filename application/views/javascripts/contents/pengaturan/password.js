@@ -5,6 +5,7 @@ $(function () {
             const password = $("#password");
             const password_confirm = $("#password_confirm");
             // cek password lama
+            $.LoadingOverlay("show");
             $.ajax({
                 method: 'post',
                 url: '<?= base_url() ?>pengaturan/password/cek_password',
@@ -13,6 +14,7 @@ $(function () {
                 },
             }).done((data) => {
                 if (data) {
+                    $.LoadingOverlay("show");
                     $.ajax({
                         method: 'post',
                         url: '<?= base_url() ?>pengaturan/password/update_password',
@@ -44,6 +46,8 @@ $(function () {
                             icon: 'error',
                             title: $xhr
                         })
+                    }).always(function () {
+                        $.LoadingOverlay("hide");
                     })
                 } else {
                     Toast.fire({
@@ -58,6 +62,8 @@ $(function () {
                     icon: 'error',
                     title: $xhr
                 })
+            }).always(function () {
+                $.LoadingOverlay("hide");
             })
         }
     });
