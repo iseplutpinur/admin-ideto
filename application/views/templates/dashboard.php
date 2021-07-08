@@ -96,6 +96,12 @@
 					</div>
 				</li> -->
 				<li class="nav-item">
+					<input type="checkbox" name="dark-mode-switch" id="dark-mode-switch" style="display: none;">
+					<label class="nav-link" for="dark-mode-switch" id="dark-mode-switch-label" style="cursor: pointer;">
+						<i class="far fa-moon"></i>
+					</label>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" data-widget="fullscreen" href="#" role="button">
 						<i class="fas fa-expand-arrows-alt"></i>
 					</a>
@@ -289,6 +295,16 @@
 						window.location.href = "<?= base_url() ?>login/logout";
 					}
 				})
+			})
+
+			$("#dark-mode-switch").change(function() {
+				if (this.checked) {
+					$("body").addClass("dark-mode")
+					$("#dark-mode-switch-label").html('<i class="far fa-sun"></i>');
+				} else {
+					$("body").removeClass("dark-mode")
+					$("#dark-mode-switch-label").html('<i class="far fa-moon"></i>');
+				}
 			})
 		})
 	</script>
