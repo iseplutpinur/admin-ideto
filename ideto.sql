@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2021 at 12:42 AM
+-- Generation Time: Jul 08, 2021 at 10:58 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -62,6 +62,13 @@ CREATE TABLE `konten_about_ideto` (
   `sejarah_gambar` varchar(250) DEFAULT NULL,
   `tanggal` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `konten_about_ideto`
+--
+
+INSERT INTO `konten_about_ideto` (`id`, `slider_judul`, `slider_deskripsi`, `profil_judul`, `profil_deskripsi`, `profil_gambar`, `sejarah_judul`, `sejarah_deskripsi`, `sejarah_gambar`, `tanggal`) VALUES
+(1, 'Profile', 'Lorem', 'Profile judul', '<p><span xss=\"removed\" style=\"font-size: 24px;\">&nbsp;Testing 123 12</span><span style=\"font-size: 24px;\">﻿</span><br><img src=\"http://localhost/aplikasi/pro/ideto/images/about/ideto/bajay1.png\" alt=\"bajay1.png\" style=\"width: 25%; float: right;\" class=\"note-float-right\"></p>', NULL, 'Sejarah judul', '<p>123</p>', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -301,7 +308,13 @@ INSERT INTO `menu` (`menu_id`, `menu_menu_id`, `menu_nama`, `menu_keterangan`, `
 (4, 2, 'Menu', '-', 2, 'far fa-circle', 'pengaturan/menu', 'Aktif', '2020-06-18 09:40:07'),
 (5, 2, 'Level', '-', 3, 'far fa-circle', 'pengaturan/level', 'Aktif', '2020-06-18 09:40:07'),
 (6, 2, 'Pengguna', '-', 4, 'far fa-circle', 'pengaturan/pengguna', 'Aktif', '2020-06-18 09:40:07'),
-(64, 0, 'Ganti Password', 'Ganti password', 99, 'fa fa-key', 'pengaturan/password', 'Aktif', '2021-06-28 15:34:14');
+(64, 0, 'Ganti Password', 'Ganti password', 99, 'fa fa-key', 'pengaturan/password', 'Aktif', '2021-06-28 15:34:14'),
+(69, 0, 'About', '-', 2, 'fas fa-address-card', '#', 'Aktif', '2021-07-08 13:38:35'),
+(70, 69, 'Ideto', '-', 1, ' far fa-circle', 'about/ideto', 'Aktif', '2021-07-08 13:42:47'),
+(71, 69, 'Penata Laksana', '-', 2, 'far fa-circle', 'about/penatalaksana', 'Aktif', '2021-07-08 13:44:03'),
+(72, 69, 'Penyerahan', '-', 4, 'far fa-circle', 'about/penyerahan', 'Aktif', '2021-07-08 13:45:10'),
+(73, 69, 'Kebijakan', '-', 3, 'far fa-circle', 'about/kebijakan', 'Aktif', '2021-07-08 13:46:11'),
+(74, 69, 'Lain-Lain', '-', 5, 'far fa-circle', 'about/lainlain', 'Aktif', '2021-07-08 13:46:36');
 
 -- --------------------------------------------------------
 
@@ -343,35 +356,19 @@ CREATE TABLE `role_aplikasi` (
 --
 
 INSERT INTO `role_aplikasi` (`rola_id`, `rola_menu_id`, `rola_lev_id`, `created_at`) VALUES
-(2, 1, 1, '2020-06-18 09:39:47'),
-(7, 6, 1, '2020-06-18 09:39:47'),
-(8, 2, 1, '2020-06-18 09:39:47'),
-(17, 15, 1, '2020-06-18 10:24:29'),
-(24, 19, 1, '2020-06-27 14:03:43'),
-(27, 21, 1, '2020-07-07 00:55:36'),
-(28, 23, 1, '2020-07-07 06:56:39'),
-(32, 27, 1, '2020-07-15 07:54:34'),
-(37, 5, 1, '2021-02-13 07:32:12'),
-(50, 40, 1, '2021-03-01 15:32:47'),
-(51, 38, 1, '2021-03-01 15:32:57'),
-(52, 39, 1, '2021-03-01 15:33:07'),
-(53, 41, 1, '2021-03-01 16:12:36'),
-(54, 42, 1, '2021-03-01 16:12:43'),
-(59, 47, 1, '2021-03-01 16:17:19'),
-(60, 48, 1, '2021-03-02 07:27:51'),
-(63, 51, 1, '2021-03-17 09:45:35'),
-(77, 52, 1, '2021-04-25 03:00:04'),
-(78, 53, 1, '2021-04-25 03:00:17'),
-(79, 54, 1, '2021-04-25 03:01:04'),
-(80, 55, 1, '2021-04-25 03:01:12'),
-(81, 56, 1, '2021-05-20 09:22:00'),
-(82, 57, 1, '2021-05-22 08:27:30'),
-(83, 58, 1, '2021-05-22 08:27:38'),
-(84, 59, 1, '2021-05-23 04:36:43'),
-(85, 60, 1, '2021-05-29 09:12:07'),
-(86, 61, 1, '2021-06-11 12:47:46'),
-(92, 63, 1, '2021-06-26 15:43:13'),
-(95, 64, 1, '2021-06-28 17:17:07');
+(97, 1, 1, '2021-07-07 23:00:32'),
+(98, 3, 1, '2021-07-07 23:00:44'),
+(99, 4, 1, '2021-07-07 23:00:51'),
+(100, 5, 1, '2021-07-07 23:00:57'),
+(101, 6, 1, '2021-07-07 23:01:00'),
+(102, 64, 1, '2021-07-07 23:01:04'),
+(103, 2, 1, '2021-07-07 23:01:26'),
+(104, 69, 1, '2021-07-08 13:38:44'),
+(105, 70, 1, '2021-07-08 13:48:17'),
+(106, 71, 1, '2021-07-08 13:48:24'),
+(107, 72, 1, '2021-07-08 13:48:31'),
+(109, 73, 1, '2021-07-08 13:49:21'),
+(110, 74, 1, '2021-07-08 13:49:32');
 
 -- --------------------------------------------------------
 
@@ -391,7 +388,9 @@ CREATE TABLE `role_users` (
 --
 
 INSERT INTO `role_users` (`role_id`, `role_user_id`, `role_lev_id`, `created_at`) VALUES
-(1, 1, 1, '2020-06-18 09:39:26');
+(1, 1, 1, '2020-06-18 09:39:26'),
+(338, 336, 1, '2021-07-07 23:38:14'),
+(339, 337, 1, '2021-07-07 23:38:57');
 
 -- --------------------------------------------------------
 
@@ -431,7 +430,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_nama`, `user_password`, `user_email`, `user_phone`, `user_status`, `created_at`, `updated_at`) VALUES
-(1, 'Admin Pusat', '$2y$10$Rjouuev8QI3/bmgJAaWg3O52Mg00xYWNOEVs0CERf6mdsHTFPC.T.', 'administrator@gmail.com', '08123123', 'Aktif', '2020-06-18 09:39:08', '2020-06-18 09:39:08');
+(1, 'Admin Pusat', '$2y$10$gp.46.UzygRVbGZTyzDZ6eZrMQ1q4jBhQtQSsWafE7vO3e50CfOqu', 'administrator@gmail.com', '08123123', 'Aktif', '2020-06-18 09:39:08', '2020-06-18 09:39:08'),
+(336, 'sdafsdf', '$2y$10$PV2NsX9xL8bnbWBEA5rvnOb4SLO6HLwH8038BGHBFLZJchISA/oTi', '123', '1123', 'Aktif', '2021-07-07 23:38:14', '0000-00-00 00:00:00'),
+(337, '123456', '$2y$10$mTU6yyDkqF4onkdbHFgtm.Cc/6700J.F0U1ki8.QwbxQOPXRrbfjC', 'iseplutpi@gmail.com', '1111', 'Aktif', '2021-07-07 23:38:57', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -580,7 +581,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `konten_about_ideto`
 --
 ALTER TABLE `konten_about_ideto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `konten_about_kebijakan`
@@ -646,13 +647,13 @@ ALTER TABLE `konten_utama`
 -- AUTO_INCREMENT for table `level`
 --
 ALTER TABLE `level`
-  MODIFY `lev_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `lev_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `pengguna`
@@ -664,13 +665,13 @@ ALTER TABLE `pengguna`
 -- AUTO_INCREMENT for table `role_aplikasi`
 --
 ALTER TABLE `role_aplikasi`
-  MODIFY `rola_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `rola_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT for table `role_users`
 --
 ALTER TABLE `role_users`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=337;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=340;
 
 --
 -- AUTO_INCREMENT for table `tokens`
@@ -682,5 +683,5 @@ ALTER TABLE `tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=335;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=338;
 COMMIT;
