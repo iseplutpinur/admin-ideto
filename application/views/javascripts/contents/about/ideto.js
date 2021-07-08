@@ -1,13 +1,13 @@
 $(function () {
     // Summernote
-    $('#summernote').summernote({
+    $('.summernote').summernote({
         toolbar: [
             ['fontsize', ['fontsize']], ['fontname', ['fontname']], ['style', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
             ['para', ['ul', 'ol', 'paragraph']], ['height', ['height']], ['color', ['color']], ['float', ['floatLeft', 'floatRight', 'floatNone']], ['remove', ['removeMedia']], ['table', ['table']], ['insert', ['link', 'unlink', 'picture', 'hr']], ['mybutton', ['myVideo']], ['view', ['fullscreen', 'codeview']], ['help', ['help']]],
-        height: ($(window).height() - 300),
+        height: ($(window).height() - 400),
         callbacks: {
             onImageUpload: function (image) {
-                uploadImage(image[0]);
+                uploadImage(image[0], $(this));
             }, onMediaDelete: function (target) {
                 deleteFile(target[0].alt);
             }
@@ -50,7 +50,7 @@ $(function () {
         return (match && match[2].length === 11) ? match[2] : null;
     }
 
-    function uploadImage(image) {
+    function uploadImage(image, id) {
         $.LoadingOverlay("show");
         var data = new FormData();
         data.append("image", image);
@@ -65,7 +65,7 @@ $(function () {
                 if (data.url.status == 1) {
                     var image = $('<img>').attr('src', data.url.path);
                     image.attr('alt', data.url.file_name);
-                    $('#summernote').summernote("insertNode", image[0]);
+                    id.summernote("insertNode", image[0]);
                 } else {
                     alert(data.url.message)
                 }
