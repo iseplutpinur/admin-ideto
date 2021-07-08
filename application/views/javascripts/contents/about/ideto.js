@@ -1,10 +1,9 @@
 $(function () {
     // Summernote
     $('#summernote').summernote({
-
         toolbar: [
             ['fontsize', ['fontsize']], ['fontname', ['fontname']], ['style', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
-            ['para', ['ul', 'ol', 'paragraph']], ['height', ['height']], ['color', ['color']], ['float', ['floatLeft', 'floatRight', 'floatNone']], ['remove', ['removeMedia']], ['table', ['table']], ['insert', ['link', 'unlink', 'picture', 'video', 'hr']], ['view', ['fullscreen', 'codeview']], ['help', ['help']]],
+            ['para', ['ul', 'ol', 'paragraph']], ['height', ['height']], ['color', ['color']], ['float', ['floatLeft', 'floatRight', 'floatNone']], ['remove', ['removeMedia']], ['table', ['table']], ['insert', ['link', 'unlink', 'picture', 'hr']], ['mybutton', ['myVideo']], ['view', ['fullscreen', 'codeview']], ['help', ['help']]],
         height: ($(window).height() - 300),
         callbacks: {
             onImageUpload: function (image) {
@@ -12,8 +11,46 @@ $(function () {
             }, onMediaDelete: function (target) {
                 deleteFile(target[0].alt);
             }
+        },
+        buttons: {
+            myVideo: function (context) {
+                var ui = $.summernote.ui;
+                var button = ui.button({
+                    contents: '<i class="note-icon-video">',
+                    tooltip: 'Youtube Video',
+                    click: function () {
+                        var div = document.createElement('div');
+                        div.classList.add('embed-container');
+
+                        var iframe = document.createElement('iframe');
+                        const yturl = prompt('Enter video youtube url:');
+                        if (yturl == "") {
+                            return;
+                        }
+
+                        iframe.src = 'https://www.youtube.com/embed/' + getId(yturl);
+
+                        iframe.setAttribute('frameborder', 0);
+                        iframe.setAttribute('width', '788.54');
+                        iframe.setAttribute('height', '443');
+                        iframe.setAttribute('allowfullscreen', true);
+                        div.appendChild(iframe);
+                        context.invoke('editor.insertNode', div);
+                    }
+                });
+                return button.render();
+            }
         }
     })
+
+    function getId(url) {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = url.match(regExp);
+
+        return (match && match[2].length === 11)
+            ? match[2]
+            : null;
+    }
 
     function uploadImage(image) {
         var data = new FormData();
