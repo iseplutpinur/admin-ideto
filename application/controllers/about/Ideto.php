@@ -21,6 +21,7 @@ class Ideto extends Render_Controller
 
         // content
         $this->content      = 'about/ideto';
+        $this->data['about']  = $this->db->get('konten_about_ideto')->row_array();
 
         // Send data to view
         $this->render();
@@ -44,7 +45,7 @@ class Ideto extends Render_Controller
                     'status' => 1,
                     'path' => $url,
                     'file_name' => $file_name,
-                    'path_upload' => './' . $path
+                    'path_upload' => './' . $path . $file_name
                 ]
             ]);
         } else {
@@ -61,12 +62,84 @@ class Ideto extends Render_Controller
     {
         $name = $this->input->post('name');
         $path = './' . $this->path . $name;
-        $result = unlink($path);
-        $this->output_json($result);
+        $result = true;
+
+        if (file_exists($path)) {
+            $result = unlink($path);
+        }
+
+        $this->output_json([
+            'url' => [
+                'status' => $result,
+                'path_upload' => $path
+            ]
+        ]);
     }
 
     public function insertSlider()
     {
+        // get row jika ada
+        $row = $this->db->select('id')->from('konten_about_ideto')->get()->result_array();
+        $judul = $this->input->post('judul');
+        $deskripsi = $this->input->post('deskripsi');
+        if (count($row) > 0) {
+            $id = $row[0]['id'];
+            $this->db->where('id', $id);
+            $exe = $this->db->update('konten_about_ideto', [
+                'slider_judul' => $judul,
+                'slider_deskripsi' => $deskripsi
+            ]);
+        } else {
+            $exe                         = $this->db->insert('konten_about_ideto', [
+                'slider_judul' => $judul,
+                'slider_deskripsi' => $deskripsi
+            ]);
+        }
+        $this->output_json(["status" => $exe]);
+    }
+
+    public function insertProfile()
+    {
+        // get row jika ada
+        $row = $this->db->select('id')->from('konten_about_ideto')->get()->result_array();
+        $judul = $this->input->post('judul');
+        $deskripsi = $this->input->post('deskripsi', false);
+        if (count($row) > 0) {
+            $id = $row[0]['id'];
+            $this->db->where('id', $id);
+            $exe = $this->db->update('konten_about_ideto', [
+                'profil_judul' => $judul,
+                'profil_deskripsi' => $deskripsi
+            ]);
+        } else {
+            $exe = $this->db->insert('konten_about_ideto', [
+                'profil_judul' => $judul,
+                'profil_deskripsi' => $deskripsi
+            ]);
+        }
+        $this->output_json(["status" => $exe]);
+    }
+
+    public function insertSejarah()
+    {
+        // get row jika ada
+        $row = $this->db->select('id')->from('konten_about_ideto')->get()->result_array();
+        $judul = $this->input->post('judul');
+        $deskripsi = $this->input->post('deskripsi', false);
+        if (count($row) > 0) {
+            $id = $row[0]['id'];
+            $this->db->where('id', $id);
+            $exe = $this->db->update('konten_about_ideto', [
+                'sejarah_judul' => $judul,
+                'sejarah_deskripsi' => $deskripsi
+            ]);
+        } else {
+            $exe = $this->db->insert('konten_about_ideto', [
+                'sejarah_judul' => $judul,
+                'sejarah_deskripsi' => $deskripsi
+            ]);
+        }
+        $this->output_json(["status" => $exe]);
     }
 
     function __construct()

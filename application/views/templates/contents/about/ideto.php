@@ -10,11 +10,11 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="slider-judul">Judul</label>
-                        <input type="text" class="form-control" placeholder="Slider Judul" id="slider-judul" name="slider-judul">
+                        <input type="text" class="form-control" placeholder="Slider Judul" id="slider-judul" name="slider-judul" value="<?= isset($about['slider_judul']) ? $about['slider_judul'] : '' ?>">
                     </div>
                     <div class="form-group">
                         <label for="slider-deskripsi">Deskripsi</label>
-                        <textarea class="form-control" rows="3" placeholder="Slider Deskripsi" id="slider-deskripsi" name="slider-deskripsi"></textarea>
+                        <textarea class="form-control" rows="3" placeholder="Slider Deskripsi" id="slider-deskripsi" name="slider-deskripsi"><?= isset($about['slider_deskripsi']) ? $about['slider_deskripsi'] : '' ?></textarea>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -37,12 +37,11 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="profile-judul">Judul</label>
-                        <input type="text" class="form-control" placeholder="Profil Judul" id="profile-judul" name="profile-judul">
-                        <input type="hidden" id="profile-deskripsi-image-path" name="profile-deskripsi-image-path">
+                        <input type="text" class="form-control" placeholder="Profil Judul" id="profile-judul" name="profile-judul" value="<?= isset($about['profil_judul']) ? $about['profil_judul'] : '' ?>">
                     </div>
                     <div class="form-group">
                         <label for="profile-deskripsi">Deskripsi</label>
-                        <textarea id="profile-deskripsi" name="profile-deskripsi" class="summernote"></textarea>
+                        <textarea id="profile-deskripsi" name="profile-deskripsi" class="summernote"><?= isset($about['profil_deskripsi']) ? $about['profil_deskripsi'] : '' ?></textarea>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -65,12 +64,11 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="sejarah-judul">Judul</label>
-                        <input type="text" class="form-control" placeholder="Sejarah Judul" id="sejarah-judul" name="sejarah-judul">
-                        <input type="hidden" id="sejarah-deskripsi-image-path" name="sejarah-deskripsi-image-path">
+                        <input type="text" class="form-control" placeholder="Sejarah Judul" id="sejarah-judul" name="sejarah-judul" value="<?= isset($about['sejarah_judul']) ? $about['sejarah_judul'] : '' ?>">
                     </div>
                     <div class="form-group">
                         <label for="sejarah-deskripsi">Deskripsi</label>
-                        <textarea id="sejarah-deskripsi" name="sejarah-deskripsi" class="summernote"></textarea>
+                        <textarea id="sejarah-deskripsi" name="sejarah-deskripsi" class="summernote"><?= isset($about['sejarah_deskripsi']) ? $about['sejarah_deskripsi'] : '' ?></textarea>
                     </div>
                 </div>
                 <div class="card-footer">

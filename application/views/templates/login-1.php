@@ -42,7 +42,7 @@
         <a href="" class="h1"><b>IDETO</b>.co.id</a>
       </div>
       <div class="card-body">
-        <p class="login-box-msg">Login to start your session</p>
+        <p class="login-box-msg">Memanusiakan Manusia</p>
 
         <form action="" method="post" id="form-login">
           <div class="form-group">
@@ -52,7 +52,7 @@
             <input type="password" name="password" class="form-control" id="password" placeholder="Password">
           </div>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <div class="icheck-primary">
                 <input type="checkbox" id="password-visibility">
                 <label for="password-visibility">
@@ -60,22 +60,20 @@
                 </label>
               </div>
             </div>
+            <div class="col-md-6">
+              <div class="icheck-primary">
+                <a href="<?= base_url() ?>lupaPassword" style="text-align: right; float: right;">Lupa Password</a>
+              </div>
+            </div>
           </div>
         </form>
 
         <div class="social-auth-links text-center mt-2 mb-3">
           <button type="submit" form="form-login" class="btn btn-block btn-primary">
-            <i class="fas fa-sign-in-alt"></i> Login
+            <i class="fas fa-sign-in-alt"></i> Masuk
           </button>
         </div>
         <!-- /.social-auth-links -->
-
-        <p class="mb-1">
-          <a href="forgot-password.html">I forgot my password</a>
-        </p>
-        <p class="mb-0">
-          <a href="register.html" class="text-center">Register a new membership</a>
-        </p>
       </div>
       <!-- /.card-body -->
     </div>

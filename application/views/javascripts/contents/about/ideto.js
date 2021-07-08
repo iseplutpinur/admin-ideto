@@ -1,3 +1,5 @@
+const profile_image = new Set();
+const sejarah_image = new Set();
 $(function () {
     // Summernote
     $('.summernote').summernote({
@@ -9,7 +11,7 @@ $(function () {
             onImageUpload: function (image) {
                 uploadImage(image[0], $(this));
             }, onMediaDelete: function (target) {
-                deleteFile(target[0].alt);
+                deleteFile(target[0].alt, $(this));
             }
         },
         buttons: {
@@ -66,6 +68,12 @@ $(function () {
                     var image = $('<img>').attr('src', data.url.path);
                     image.attr('alt', data.url.file_name);
                     id.summernote("insertNode", image[0]);
+                    const path = data.url.path_upload;
+                    if (id.prop("id") == "profile-deskripsi") {
+                        profile_image.add(path);
+                    } else {
+                        sejarah_image.add(path);
+                    }
                 } else {
                     alert(data.url.message)
                 }
@@ -79,7 +87,7 @@ $(function () {
         });
     }
 
-    function deleteFile(name) {
+    function deleteFile(name, id) {
         $.LoadingOverlay("show");
         $.ajax({
             url: "<?= base_url()?>about/ideto/deleteImage",
@@ -88,10 +96,15 @@ $(function () {
             },
             type: "post",
             success: function (data) {
-                console.log(data);
+                const path = data.url.path_upload;
+                if (id.prop("id") == "profile-deskripsi") {
+                    profile_image.delete(path);
+                } else {
+                    sejarah_image.delete(path);
+                }
             },
             error: function (data) {
-                alert(data);
+                alert(data.message);
             },
             complete: function () {
                 $.LoadingOverlay("hide");
@@ -105,13 +118,84 @@ $(function () {
         $.LoadingOverlay("show");
         $.ajax({
             url: "<?= base_url()?>about/ideto/insertSlider",
-            data: null,
+            data: {
+                judul: $("#slider-judul").val(),
+                deskripsi: $("#slider-deskripsi").val(),
+            },
             type: "post",
             success: function (data) {
-                console.log(data);
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Berhasil diubah.'
+                })
             },
             error: function (data) {
-                alert(data);
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Gagal Diubah..'
+                })
+            },
+            complete: function () {
+                $.LoadingOverlay("hide");
+            }
+        });
+    })
+
+
+    // simpan Profile
+    $("#form-profile").submit(function (ev) {
+        ev.preventDefault();
+
+        $.LoadingOverlay("show");
+        $.ajax({
+            url: "<?= base_url()?>about/ideto/insertProfile",
+            data: {
+                judul: $("#profile-judul").val(),
+                deskripsi: $("#profile-deskripsi").summernote('code'),
+                gambar: Array.from(profile_image)
+            },
+            type: "post",
+            success: function (data) {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Berhasil diubah.'
+                })
+            },
+            error: function (data) {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Gagal Diubah..'
+                })
+            },
+            complete: function () {
+                $.LoadingOverlay("hide");
+            }
+        });
+    })
+
+    // simpan Sejarah
+    $("#form-sejarah").submit(function (ev) {
+        ev.preventDefault();
+        $.LoadingOverlay("show");
+        $.ajax({
+            url: "<?= base_url()?>about/ideto/insertSejarah",
+            data: {
+                judul: $("#sejarah-judul").val(),
+                deskripsi: $("#sejarah-deskripsi").summernote('code'),
+                gambar: Array.from(sejarah_image)
+            },
+            type: "post",
+            success: function (data) {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Berhasil diubah.'
+                })
+            },
+            error: function (data) {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Gagal Diubah..'
+                })
             },
             complete: function () {
                 $.LoadingOverlay("hide");
