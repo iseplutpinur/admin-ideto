@@ -13,7 +13,7 @@
                         <input type="text" class="form-control" placeholder="Slider Judul" id="slider-judul" name="slider-judul">
                     </div>
                     <div class="form-group">
-                        <label id="slider-deskripsi">Deskripsi</label>
+                        <label for="slider-deskripsi">Deskripsi</label>
                         <textarea class="form-control" rows="3" placeholder="Slider Deskripsi" id="slider-deskripsi" name="slider-deskripsi"></textarea>
                     </div>
                 </div>
@@ -38,6 +38,7 @@
                     <div class="form-group">
                         <label for="profile-judul">Judul</label>
                         <input type="text" class="form-control" placeholder="Profil Judul" id="profile-judul" name="profile-judul">
+                        <input type="hidden" id="profile-deskripsi-image-path" name="profile-deskripsi-image-path">
                     </div>
                     <div class="form-group">
                         <label for="profile-deskripsi">Deskripsi</label>
@@ -63,11 +64,12 @@
             <form id="form-sejarah">
                 <div class="card-body">
                     <div class="form-group">
-                        <label id="sejarah-judul">Judul</label>
+                        <label for="sejarah-judul">Judul</label>
                         <input type="text" class="form-control" placeholder="Sejarah Judul" id="sejarah-judul" name="sejarah-judul">
+                        <input type="hidden" id="sejarah-deskripsi-image-path" name="sejarah-deskripsi-image-path">
                     </div>
                     <div class="form-group">
-                        <label id="sejarah-deskripsi">Deskripsi</label>
+                        <label for="sejarah-deskripsi">Deskripsi</label>
                         <textarea id="sejarah-deskripsi" name="sejarah-deskripsi" class="summernote"></textarea>
                     </div>
                 </div>

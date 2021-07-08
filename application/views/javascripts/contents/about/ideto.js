@@ -98,4 +98,24 @@ $(function () {
             }
         });
     }
+
+    // simpan slider
+    $("#form-slider").submit(function (ev) {
+        ev.preventDefault();
+        $.LoadingOverlay("show");
+        $.ajax({
+            url: "<?= base_url()?>about/ideto/insertSlider",
+            data: null,
+            type: "post",
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (data) {
+                alert(data);
+            },
+            complete: function () {
+                $.LoadingOverlay("hide");
+            }
+        });
+    })
 })

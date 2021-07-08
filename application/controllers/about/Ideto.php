@@ -43,7 +43,8 @@ class Ideto extends Render_Controller
                 'url' => [
                     'status' => 1,
                     'path' => $url,
-                    'file_name' => $file_name
+                    'file_name' => $file_name,
+                    'path_upload' => './' . $path
                 ]
             ]);
         } else {
@@ -62,6 +63,10 @@ class Ideto extends Render_Controller
         $path = './' . $this->path . $name;
         $result = unlink($path);
         $this->output_json($result);
+    }
+
+    public function insertSlider()
+    {
     }
 
     function __construct()
