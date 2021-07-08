@@ -47,12 +47,11 @@ $(function () {
         const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
         const match = url.match(regExp);
 
-        return (match && match[2].length === 11)
-            ? match[2]
-            : null;
+        return (match && match[2].length === 11) ? match[2] : null;
     }
 
     function uploadImage(image) {
+        $.LoadingOverlay("show");
         var data = new FormData();
         data.append("image", image);
         $.ajax({
@@ -73,11 +72,15 @@ $(function () {
             },
             error: function (data) {
                 console.log(data);
+            },
+            complete: function () {
+                $.LoadingOverlay("hide");
             }
         });
     }
 
     function deleteFile(name) {
+        $.LoadingOverlay("show");
         $.ajax({
             url: "<?= base_url()?>about/ideto/deleteImage",
             data: {
@@ -89,6 +92,9 @@ $(function () {
             },
             error: function (data) {
                 alert(data);
+            },
+            complete: function () {
+                $.LoadingOverlay("hide");
             }
         });
     }
