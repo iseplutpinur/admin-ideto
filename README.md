@@ -1,2 +1,0 @@
-# clc-keuangan
-project jogja
