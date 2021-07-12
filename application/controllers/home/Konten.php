@@ -1,56 +1,40 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Ideto extends Render_Controller
+class Konten extends Render_Controller
 {
 
     public function index()
     {
         // Page Settings
-        $this->title = 'About - Ideto';
-        $this->navigation = ['About', "Ideto"];
+        $this->title = 'Home - Konten';
+        $this->navigation = ['Home', "Konten Home"];
         $this->plugins = ['summernote'];
 
         // Breadcrumb setting
         $this->breadcrumb_1 = 'Dashboard';
         $this->breadcrumb_1_url = base_url();
-        $this->breadcrumb_2 = 'About';
+        $this->breadcrumb_2 = 'Home';
         $this->breadcrumb_2_url = '#';
-        $this->breadcrumb_3 = 'Ideto';
+        $this->breadcrumb_3 = 'Konten';
         $this->breadcrumb_3_url = '#';
 
         // content
-        $this->content      = 'about/ideto';
-        $this->data['about']  = $this->model->getData();
+        $this->content      = 'home/konten';
+        $this->data['home']  = $this->model->getData();
 
         // Send data to view
         $this->render();
     }
 
-    public function insertSlider()
+    public function insert()
     {
         // get row jika ada
-        $judul = $this->input->post('judul');
-        $deskripsi = $this->input->post('deskripsi');
-        $exe = $this->model->inputSlider($judul, $deskripsi);
-        $this->output_json(["status" => $exe]);
-    }
-
-    public function insertProfile()
-    {
-        // get row jika ada
-        $judul = $this->input->post('judul');
-        $deskripsi = $this->input->post('deskripsi', false);
-        $exe = $this->model->inputProfile($judul, $deskripsi);
-        $this->output_json(["status" => $exe]);
-    }
-
-    public function insertSejarah()
-    {
-        // get row jika ada
-        $judul = $this->input->post('judul');
-        $deskripsi = $this->input->post('deskripsi', false);
-        $exe = $this->model->inputSejarah($judul, $deskripsi);
+        $slider_judul       = $this->input->post('slider_judul');
+        $slider_deskripsi   = $this->input->post('slider_deskripsi');
+        $informasi_judul            = $this->input->post('informasi_judul');
+        $informasi_deskripsi        = $this->input->post('informasi_deskripsi', false);
+        $exe = $this->model->inputData($slider_judul, $slider_deskripsi, $informasi_judul, $informasi_deskripsi);
         $this->output_json(["status" => $exe]);
     }
 
@@ -114,10 +98,10 @@ class Ideto extends Render_Controller
         $this->sesion->cek_session();
 
         // model
-        $this->load->model("about/IdetoModel", 'model');
+        $this->load->model("home/KontenModel", 'model');
 
         // path
-        $this->path = 'images/about/ideto/';
+        $this->path = 'images/home/konten/';
     }
 }
 
