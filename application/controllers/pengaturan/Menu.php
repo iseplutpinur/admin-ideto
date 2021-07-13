@@ -126,13 +126,14 @@ class Menu extends Render_Controller
 	function __construct()
 	{
 		parent::__construct();
+		$this->sesion->cek_session();
+		if ($this->session->userdata('data')['level'] != 'Administrator') {
+			redirect('login', 'refresh');
+		}
 		$this->load->model('pengaturan/menuModel', 'menu');
 		$this->default_template = 'templates/dashboard';
 		$this->load->library('plugin');
 		$this->load->helper('url');
-
-		// Cek session
-		$this->sesion->cek_session();
 	}
 }
 

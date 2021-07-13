@@ -34,6 +34,14 @@ $(function () {
         });
     }
     dynamic();
+
+    $("#btn-tambah").click(() => {
+        const currentDate = new Date()
+        $('#tanggal').val(currentDate.toISOString().split('T')[0]);
+        $("#myModalLabel").text("Tambah Kategori");
+        $('#id').val("");
+        $('#nama').val("");
+    });
 })
 
 // Click Hapus
@@ -49,16 +57,24 @@ const Ubah = (id) => {
     $.LoadingOverlay("show");
     $.ajax({
         method: 'get',
-        url: '<?= base_url() ?>informasi/kategori',
+        url: '<?= base_url() ?>informasi/kategori/getKategori',
         data: {
             id: id
         }
     }).done((data) => {
-        $('#myModalLabel').html('Ubah Kategori')
-        $('#id').val(data.id)
-        $('#nama').val(data.nama)
-        $('#tanggal').val(data.tanggal)
-        $('#myModal').modal('toggle')
+        if (data.data) {
+            data = data.data;
+            $("#myModalLabel").text("Ubah Kategori");
+            $('#id').val(data.id)
+            $('#nama').val(data.nama)
+            $('#tanggal').val(data.tanggal)
+            $('#myModal').modal('toggle')
+        } else {
+            Toast.fire({
+                icon: 'error',
+                title: 'Data tidak valid.'
+            })
+        }
     }).fail(($xhr) => {
         Toast.fire({
             icon: 'error',

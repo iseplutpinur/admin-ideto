@@ -31,13 +31,14 @@ class ListInformasi extends Render_Controller
 	{
 		parent::__construct();
 		// model
+		$this->sesion->cek_session();
+		if ($this->session->userdata('data')['level'] != 'Administrator') {
+			redirect('login', 'refresh');
+		}
 		$this->load->model("informasi/KontenModel", 'model');
 		$this->default_template = 'templates/dashboard';
 		$this->load->library('plugin');
 		$this->load->helper('url');
-
-		// Cek session
-		$this->sesion->cek_session();
 	}
 }
 

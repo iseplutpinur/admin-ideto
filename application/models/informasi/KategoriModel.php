@@ -1,4 +1,7 @@
 <?php
+
+use PhpOffice\PhpSpreadsheet\Calculation\Logical\Boolean;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class KategoriModel extends Render_Model
@@ -37,5 +40,19 @@ class KategoriModel extends Render_Model
 
         $result = $this->db->get();
         return $result;
+    }
+
+    public function getKategori($id)
+    {
+        $result = $this->db->get_where("kategori", ['id' => $id])->row_array();
+        return $result;
+    }
+
+    public function insert($nama, $tanggal)
+    {
+    }
+
+    public function update($id, $nama, $tanggal)
+    {
     }
 }

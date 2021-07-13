@@ -48,17 +48,43 @@ class Kategori extends Render_Controller
         $this->output_json(['recordsTotal' => $count, 'recordsFiltered' => $count, 'draw' => $draw, 'search' => $_cari, 'data' => $data]);
     }
 
+    public function getKategori()
+    {
+        $id = $this->input->get("id");
+        $result = $this->model->getKategori($id);
+        $this->output_json(["data" => $result]);
+    }
+
+    public function insert()
+    {
+        $nama = $this->input->post("nama");
+        $tanggal = $this->input->post("tanggal");
+        $result = $this->model->insert($nama, $tanggal);
+        $this->output_json(["data" => $result]);
+    }
+
+    public function update()
+    {
+        $id = $this->input->post("id");
+        $nama = $this->input->post("nama");
+        $tanggal = $this->input->post("tanggal");
+        $result = $this->model->update($id, $nama, $tanggal);
+        $this->output_json(["data" => $result]);
+    }
+
     function __construct()
     {
         parent::__construct();
-        // model
+        // Cek session
+        $this->sesion->cek_session();
+        if ($this->session->userdata('data')['level'] != 'Administrator') {
+            redirect('login', 'refresh');
+        }
+
         $this->load->model("informasi/KategoriModel", 'model');
         $this->default_template = 'templates/dashboard';
         $this->load->library('plugin');
         $this->load->helper('url');
-
-        // Cek session
-        $this->sesion->cek_session();
     }
 }
 

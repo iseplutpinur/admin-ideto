@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="nama"> Nama</label>
+                                <label for="nama"> Nama Kategori</label>
                                 <input type="text" class="form-control" id="nama" placeholder="Nama" required />
                             </div>
                         </div>
@@ -45,25 +45,11 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="nama"> Keterangan</label>
-                                <textarea class="form-control" id="keterangan" placeholder="Keterangan" rows="3" required></textarea>
+                                <label for="tanggal"> Tanggal</label>
+                                <input type="date" class="form-control" id="tanggal" placeholder="Tanggal" value="<?= Date("Y-m-d") ?>" required />
                             </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="nama"> Status</label>
-                                <select class="form-control" required id="status">
-                                    <option value="">--Pilih Status--</option>
-                                    <option value="Aktif">Aktif</option>
-                                    <option value="Tidak Aktif">Tidak Aktif</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">
