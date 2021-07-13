@@ -51,4 +51,4 @@ $config['page_setting']     = 'hold-transition sidebar-mini';
 
 $config['page_nav'] = 'main-header navbar navbar-expand navbar-white navbar-light';
 
-$config['minify'] = false;
+$config['minify'] = true;

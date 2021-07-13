@@ -57,7 +57,9 @@ class Ideto extends Render_Controller
     public function uploadImage()
     {
         $path = $this->path;
-        $config['upload_path']          = './' . $path;
+        $folder = $this->input->post('folder');
+
+        $config['upload_path']          = $path . $folder . '/';
         $config['allowed_types']        = 'gif|jpg|png|jpeg|JPG|PNG|JPEG';
         $config['overwrite']            = false;
         $config['max_size']             = 8024;
@@ -71,8 +73,7 @@ class Ideto extends Render_Controller
                 'url' => [
                     'status' => 1,
                     'path' => $url,
-                    'file_name' => $file_name,
-                    'path_upload' => './' . $path . $file_name
+                    'file_name' => $file_name
                 ]
             ]);
         } else {
@@ -85,22 +86,12 @@ class Ideto extends Render_Controller
         }
     }
 
-    public function deleteImage()
+    private function deleteImage($path)
     {
-        $name = $this->input->post('name');
-        $path = './' . $this->path . $name;
-        $result = true;
-
         if (file_exists($path)) {
             $result = unlink($path);
         }
-
-        $this->output_json([
-            'url' => [
-                'status' => $result,
-                'path_upload' => $path
-            ]
-        ]);
+        return $result;
     }
 
     function __construct()
@@ -115,12 +106,11 @@ class Ideto extends Render_Controller
         $this->load->library(['plugin', 'Libs']);
         $this->load->helper('url');
 
-
         // model
         $this->load->model("about/IdetoModel", 'model');
 
         // path
-        $this->path = 'images/about/ideto/';
+        $this->path = './images/about/ideto/';
     }
 }
 

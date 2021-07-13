@@ -30,11 +30,31 @@ class Konten extends Render_Controller
     public function insert()
     {
         // get row jika ada
-        $slider_judul       = $this->input->post('slider_judul');
-        $slider_deskripsi   = $this->input->post('slider_deskripsi');
+        $slider_judul               = $this->input->post('slider_judul');
+        $slider_deskripsi           = $this->input->post('slider_deskripsi');
         $informasi_judul            = $this->input->post('informasi_judul');
         $informasi_deskripsi        = $this->input->post('informasi_deskripsi', false);
-        $exe = $this->model->inputData($slider_judul, $slider_deskripsi, $informasi_judul, $informasi_deskripsi);
+
+        // list gambar yang dikirim
+        $gambars                     = $this->input->post("gambar");
+        $gambars                     = $gambars == null ? [] : $gambars;
+
+        // list file in dir
+        $this->load->helper('directory');
+        $files = directory_map($this->path, FALSE, TRUE);
+
+        foreach ($files as $file) {
+            if (!in_array($file, $gambars)) {
+                $this->deleteImage($this->path . $file);
+            }
+        }
+
+        $informasi_gambar = '';
+        foreach ($gambars as $gambar) {
+            $informasi_gambar .= ($informasi_gambar == '') ? $gambar : ('|' . $gambar);
+        }
+
+        $exe = $this->model->inputData($slider_judul, $slider_deskripsi, $informasi_judul, $informasi_deskripsi, $informasi_gambar);
         $this->output_json(["status" => $exe]);
     }
 
@@ -46,7 +66,7 @@ class Konten extends Render_Controller
             mkdir($path, 0755, TRUE);
         }
 
-        $config['upload_path']          = './' . $path;
+        $config['upload_path']          = $path;
         $config['allowed_types']        = 'gif|jpg|png|jpeg|JPG|PNG|JPEG';
         $config['overwrite']            = false;
         $config['max_size']             = 8024;
@@ -60,8 +80,7 @@ class Konten extends Render_Controller
                 'url' => [
                     'status' => 1,
                     'path' => $url,
-                    'file_name' => $file_name,
-                    'path_upload' => './' . $path . $file_name
+                    'file_name' => $file_name
                 ]
             ]);
         } else {
@@ -74,22 +93,12 @@ class Konten extends Render_Controller
         }
     }
 
-    public function deleteImage()
+    private function deleteImage($path)
     {
-        $name = $this->input->post('name');
-        $path = './' . $this->path . $name;
-        $result = true;
-
         if (file_exists($path)) {
             $result = unlink($path);
         }
-
-        $this->output_json([
-            'url' => [
-                'status' => $result,
-                'path_upload' => $path
-            ]
-        ]);
+        return $result;
     }
 
     function __construct()
@@ -109,7 +118,7 @@ class Konten extends Render_Controller
         $this->load->model("home/KontenModel", 'model');
 
         // path
-        $this->path = 'images/home/konten/';
+        $this->path = './images/home/konten/';
     }
 }
 

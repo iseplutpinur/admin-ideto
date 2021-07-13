@@ -1,11 +1,11 @@
-
 <div class="row">
     <div class="col-md-12">
         <div class="card card-outline card-info">
             <div class="card-header">
-                <h3 class="card-title">
-                    Konten
-                </h3>
+                <div class="d-flex justify-content-between w-100">
+                    <h3 class="card-title">Konten</h3>
+                    <h4 class="card-title" id="last-update"><?= isset($home['updated_at']) ? 'Last Update: ' . date('d F Y h:i:s', strtotime($home['updated_at'])) : '' ?></h4>
+                </div>
             </div>
             <form id="form-konten">
                 <div class="card-body">
@@ -17,9 +17,6 @@
                         <label for="slider-deskripsi">Deskripsi Slider</label>
                         <textarea class="form-control" rows="3" placeholder="Slider Deskripsi" id="slider-deskripsi" name="slider-deskripsi"><?= isset($home['slider_deskripsi']) ? $home['slider_deskripsi'] : '' ?></textarea>
                     </div>
-                </div>
-
-                <div class="card-body">
                     <div class="form-group">
                         <label for="informasi-judul">Judul Informasi</label>
                         <input type="text" class="form-control" placeholder="Judul Informasi" id="informasi-judul" name="informasi-judul" value="<?= isset($home['informasi_judul']) ? $home['informasi_judul'] : '' ?>">
