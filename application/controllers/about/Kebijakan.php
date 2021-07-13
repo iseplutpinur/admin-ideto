@@ -8,7 +8,7 @@ class Kebijakan extends Render_Controller
     {
         // Page Settings
         $this->title = 'About - Kebijakan';
-        $this->navigation = ['About', "Kebijakan"];
+        $this->navigation = ['About', "Konten Kebijakan"];
         $this->plugins = ['summernote'];
 
         // Breadcrumb setting
@@ -50,7 +50,7 @@ class Kebijakan extends Render_Controller
         $this->output_json(["status" => $exe]);
     }
 
-     public function uploadImage()
+    public function uploadImage()
     {
         $path = $this->path;
         $config['upload_path']          = './' . $path;

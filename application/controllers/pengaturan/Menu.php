@@ -11,7 +11,7 @@ class Menu extends Render_Controller
 		$this->title 					= 'Pengaturan Menu';
 		$this->content 					= 'pengaturan/menu';
 		$this->navigation 				= ['Pengaturan', 'Menu'];
-		$this->plugins 					= ['datatables'];
+		$this->plugins 					= ['datatables', 'datatables-btn'];
 
 		// Breadcrumb setting
 		$this->breadcrumb_1 			= 'Dashboard';

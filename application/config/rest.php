@@ -1,6 +1,6 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
@@ -44,14 +44,14 @@ $config['rest_default_format'] = 'json';
 |
 */
 $config['rest_supported_formats'] = [
-    'json',
-    'array',
-    'csv',
-    'html',
-    'jsonp',
-    'php',
-    'serialized',
-    'xml',
+  'json',
+  'array',
+  'csv',
+  'html',
+  'jsonp',
+  'php',
+  'serialized',
+  'xml',
 ];
 
 /*
@@ -110,7 +110,8 @@ $config['rest_realm'] = 'REST API';
 |           authorization key
 |
 */
-$config['rest_auth'] = FALSE;
+$config['rest_auth'] = false;
+$config['rest_auth'] = 'session';
 
 /*
 |--------------------------------------------------------------------------
@@ -127,7 +128,7 @@ $config['rest_auth'] = FALSE;
 |
 */
 $config['auth_source'] = 'ldap';
-
+$config['auth_source'] = 'userdata';
 /*
 |--------------------------------------------------------------------------
 | Allow Authentication and API Keys
@@ -324,7 +325,7 @@ $config['rest_keys_table'] = 'keys';
 |   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 |
 */
-$config['rest_enable_keys'] = FALSE;
+$config['rest_enable_keys'] = true;
 
 /*
 |--------------------------------------------------------------------------
@@ -377,7 +378,7 @@ $config['rest_key_length'] = 40;
 | 2012/06/12. See RFC 6648 specification for more details
 |
 */
-$config['rest_key_name'] = 'X-API-KEY';
+$config['rest_key_name'] = 'k';
 
 /*
 |--------------------------------------------------------------------------
@@ -546,7 +547,7 @@ $config['rest_language'] = 'english';
 | will access it through a browser
 |
 */
-$config['check_cors'] = FALSE;
+$config['check_cors'] = true;
 
 /*
 |--------------------------------------------------------------------------
@@ -603,14 +604,14 @@ $config['allow_any_cors_domain'] = FALSE;
 | e.g. $config['allowed_origins'] = ['http://www.example.com', 'https://spa.example.com']
 |
 */
-$config['allowed_cors_origins'] = [];
+$config['allowed_cors_origins'] = ['http://localhost/aplikasi/pro/ideto/api'];
 
 /*
 |--------------------------------------------------------------------------
 | CORS Forced Headers
 |--------------------------------------------------------------------------
 |
-| If using CORS checks, always include the headers and values specified here 
+| If using CORS checks, always include the headers and values specified here
 | in the OPTIONS client preflight.
 | Example:
 | $config['forced_cors_headers'] = [
@@ -619,7 +620,7 @@ $config['allowed_cors_origins'] = [];
 |
 | Added because of how Sencha Ext JS framework requires the header
 | Access-Control-Allow-Credentials to be set to true to allow the use of
-| credentials in the REST Proxy. 
+| credentials in the REST Proxy.
 | See documentation here:
 | http://docs.sencha.com/extjs/6.5.2/classic/Ext.data.proxy.Rest.html#cfg-withCredentials
 |

@@ -41,15 +41,21 @@
 		<?php endforeach; ?>
 		<!-- END PAGE LEVEL PLUGINS -->
 	<?php endif; ?>
+
+	<style>
+		.nowrap {
+			white-space: nowrap;
+		}
+	</style>
 </head>
 
 <body class="<?= $page_setting ?>">
 	<div class="wrapper">
 		<div id="loader"></div>
 		<!-- preloader -->
-		<div class="preloader flex-column justify-content-center bg-dark align-items-center">
+		<!-- <div class="preloader flex-column justify-content-center bg-dark align-items-center">
 			<img class="animation__shake" src="<?= base_url('assets/favicon/') ?>ms-icon-310x310.png" alt="IDETO.co.id Logo" height="60" width="60">
-		</div>
+		</div> -->
 		<!-- Navbar -->
 		<nav class="<?= $page_nav ?>" id="nav-top">
 			<!-- Left navbar links -->

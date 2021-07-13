@@ -11,7 +11,7 @@ class Level extends Render_Controller
 		$this->title 					= 'Pengaturan Level';
 		$this->content 					= 'pengaturan/level';
 		$this->navigation 				= ['Pengaturan', 'Level'];
-		$this->plugins 					= ['datatables'];
+		$this->plugins 					= ['datatables', 'datatables-btn'];
 
 		// Breadcrumb setting
 		$this->breadcrumb_1 			= 'Dashboard';

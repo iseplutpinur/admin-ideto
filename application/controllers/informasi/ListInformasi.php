@@ -7,8 +7,8 @@ class ListInformasi extends Render_Controller
 	public function index()
 	{
 		// Page Settings
-		$this->title = 'Informasi - Konten';
-		$this->navigation = ['Informasi', "Konten Informasi"];
+		$this->title = 'Informasi - List';
+		$this->navigation = ['Informasi', "List Informasi"];
 		$this->plugins = [];
 
 		// Breadcrumb setting
@@ -16,7 +16,7 @@ class ListInformasi extends Render_Controller
 		$this->breadcrumb_1_url = base_url();
 		$this->breadcrumb_2 = 'Informasi';
 		$this->breadcrumb_2_url = '#';
-		$this->breadcrumb_3 = 'Konten';
+		$this->breadcrumb_3 = 'List';
 		$this->breadcrumb_3_url = '#';
 
 		// content

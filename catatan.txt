@@ -1,0 +1,7 @@
+Terminologi foto hapus
+    - Dir foto hapus dimasukan kedalam array di kumpulkan.
+    - ketika di simpan maka eksekusi hapus.
+
+
+Tiap tiap summernote editor punya folder tersendiri
+    - untuk menghapus file yang tidak dibutuhkan

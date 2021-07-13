@@ -11,7 +11,7 @@ class Pengguna extends Render_Controller
 		$this->title 					= 'Pengaturan Pengguna';
 		$this->content 					= 'pengaturan/pengguna';
 		$this->navigation 				= ['Pengaturan', 'Pengguna'];
-		$this->plugins 					= ['datatables'];
+		$this->plugins 					= ['datatables', 'datatables-btn'];
 
 		// Breadcrumb setting
 		$this->breadcrumb_1 			= 'Dashboard';

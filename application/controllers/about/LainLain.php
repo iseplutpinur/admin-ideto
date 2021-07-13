@@ -8,7 +8,7 @@ class LainLain extends Render_Controller
     {
         // Page Settings
         $this->title = 'About - Lain lain';
-        $this->navigation = ['About', "Lain-Lain"];
+        $this->navigation = ['About', "Konten Lain-Lain"];
         $this->plugins = ['summernote'];
 
         // Breadcrumb setting
@@ -44,7 +44,7 @@ class LainLain extends Render_Controller
         $this->output_json(["status" => $exe]);
     }
 
-     public function uploadImage()
+    public function uploadImage()
     {
         $path = $this->path;
         $config['upload_path']          = './' . $path;

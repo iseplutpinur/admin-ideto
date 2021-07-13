@@ -11,7 +11,7 @@ class HakAkses extends Render_Controller
 		$this->title 					= 'Pengaturan Hak Akses';
 		$this->content 					= 'pengaturan/hakakses';
 		$this->navigation 				= ['Pengaturan', 'Hak Akses'];
-		$this->plugins 					= ['datatables'];
+		$this->plugins 					= ['datatables', 'datatables-btn'];
 
 		// Breadcrumb setting
 		$this->breadcrumb_1 			= 'Dashboard';

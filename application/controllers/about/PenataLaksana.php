@@ -8,7 +8,7 @@ class PenataLaksana extends Render_Controller
     {
         // Page Settings
         $this->title = 'About - Penata Laksana';
-        $this->navigation = ['About', "Penata Laksana"];
+        $this->navigation = ['About', "Konten Penata Laksana"];
         $this->plugins = [];
 
         // Breadcrumb setting
@@ -36,8 +36,8 @@ class PenataLaksana extends Render_Controller
         $this->output_json(["status" => $exe]);
     }
 
-   
-    
+
+
     function __construct()
     {
         parent::__construct();

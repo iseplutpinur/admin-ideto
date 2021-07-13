@@ -6,6 +6,16 @@ $config['datatables'] = [
 		'assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js',
 		'assets/plugins/datatables-responsive/js/dataTables.responsive.min.js',
 		'assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js',
+	],
+	'styles' => [
+		'assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css',
+		'assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css',
+		'assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css'
+	]
+];
+
+$config['datatables-btn'] = [
+	'scripts' => [
 		'assets/plugins/datatables-buttons/js/dataTables.buttons.min.js',
 		'assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js',
 		'assets/plugins/datatables-buttons/js/buttons.html5.min.js',
@@ -14,11 +24,6 @@ $config['datatables'] = [
 		'assets/plugins/jszip/jszip.min.js',
 		'assets/plugins/pdfmake/pdfmake.min.js',
 		'assets/plugins/pdfmake/vfs_fonts.js'
-	],
-	'styles' => [
-		'assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css',
-		'assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css',
-		'assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css'
 	]
 ];
 

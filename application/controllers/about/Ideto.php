@@ -8,7 +8,7 @@ class Ideto extends Render_Controller
     {
         // Page Settings
         $this->title = 'About - Ideto';
-        $this->navigation = ['About', "Ideto"];
+        $this->navigation = ['About', "Konten Ideto"];
         $this->plugins = ['summernote'];
 
         // Breadcrumb setting
@@ -54,7 +54,7 @@ class Ideto extends Render_Controller
         $this->output_json(["status" => $exe]);
     }
 
-     public function uploadImage()
+    public function uploadImage()
     {
         $path = $this->path;
         $config['upload_path']          = './' . $path;
@@ -107,7 +107,7 @@ class Ideto extends Render_Controller
     {
         parent::__construct();
         $this->default_template = 'templates/dashboard';
-        $this->load->library('plugin');
+        $this->load->library(['plugin', 'Libs']);
         $this->load->helper('url');
 
         // Cek session

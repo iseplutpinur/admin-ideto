@@ -8,7 +8,7 @@ class Penyerahan extends Render_Controller
     {
         // Page Settings
         $this->title = 'About - Penyerahan';
-        $this->navigation = ['About', "Penyerahan"];
+        $this->navigation = ['About', "Konten Penyerahan"];
         $this->plugins = ['summernote'];
 
         // Breadcrumb setting
@@ -48,7 +48,7 @@ class Penyerahan extends Render_Controller
         $this->output_json(["status" => $exe]);
     }
 
-     public function uploadImage()
+    public function uploadImage()
     {
         $path = $this->path;
         $config['upload_path']          = './' . $path;

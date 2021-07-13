@@ -100,4 +100,10 @@ class Libs
         }
         return $hasil;
     }
+
+    public function changeImageBaseUrl($current, $new, $text)
+    {
+
+        return str_replace('<img src="' . $current, '<img src="' . $new, $text);
+    }
 }
