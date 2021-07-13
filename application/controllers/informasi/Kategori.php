@@ -52,7 +52,8 @@ class Kategori extends Render_Controller
     {
         $id = $this->input->get("id");
         $result = $this->model->getKategori($id);
-        $this->output_json(["data" => $result]);
+        $code = $result ? 200 : 500;
+        $this->output_json(["data" => $result], $code);
     }
 
     public function insert()
@@ -60,7 +61,8 @@ class Kategori extends Render_Controller
         $nama = $this->input->post("nama");
         $tanggal = $this->input->post("tanggal");
         $result = $this->model->insert($nama, $tanggal);
-        $this->output_json(["data" => $result]);
+        $code = $result ? 200 : 500;
+        $this->output_json(["data" => $result], $code);
     }
 
     public function update()
@@ -69,7 +71,16 @@ class Kategori extends Render_Controller
         $nama = $this->input->post("nama");
         $tanggal = $this->input->post("tanggal");
         $result = $this->model->update($id, $nama, $tanggal);
-        $this->output_json(["data" => $result]);
+        $code = $result ? 200 : 500;
+        $this->output_json(["data" => $result], $code);
+    }
+
+    public function delete()
+    {
+        $id = $this->input->post("id");
+        $result = $this->model->delete($id);
+        $code = $result ? 200 : 500;
+        $this->output_json(["data" => $result], $code);
     }
 
     function __construct()

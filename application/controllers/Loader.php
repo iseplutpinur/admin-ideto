@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use MatthiasMullie\Minify;
+
 class Loader extends CI_Controller
 {
 
@@ -20,9 +22,7 @@ class Loader extends CI_Controller
 	{
 
 		$this->output->set_content_type('css');
-
 		$file = $this->security->sanitize_filename($filename);
-
 		if (file_exists(VIEWPATH . "stylesheets/$file.css")) {
 			$this->load->view("stylesheets/$file.css");
 		} else {
@@ -38,6 +38,7 @@ class Loader extends CI_Controller
 
 	public function javascripts_contents($folder, $file = null, $file_sub = null)
 	{
+		$this->load->helper('file');
 		$this->output->set_content_type('js');
 
 		$folder = $this->security->sanitize_filename($folder);
@@ -45,7 +46,13 @@ class Loader extends CI_Controller
 		$file_sub = $file_sub == null ? '' : $this->security->sanitize_filename($file_sub);
 		$file = $file_sub != null ? "$folder/$file/$file_sub" : ($file != null ? "$folder/$file" : $folder);
 		if (file_exists(VIEWPATH . "javascripts/contents/$file.js")) {
-			$this->load->view("javascripts/contents/$file.js");
+			if ($this->config->item('minify')) {
+				$result = $this->load->view("javascripts/contents/$file.js", '', true);
+				$minifier = new Minify\JS($result);
+				echo $minifier->minify();
+			} else {
+				$this->load->view("javascripts/contents/$file.js");
+			}
 		} else {
 			show_404();
 		}

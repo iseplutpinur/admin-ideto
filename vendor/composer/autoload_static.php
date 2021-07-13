@@ -92,6 +92,8 @@ class ComposerStaticInit4a48d6b2b30bb93b994b5113777d2b7e
         'M' => 
         array (
             'MyCLabs\\Enum\\' => 13,
+            'MatthiasMullie\\PathConverter\\' => 29,
+            'MatthiasMullie\\Minify\\' => 22,
             'Matrix\\' => 7,
         ),
         'C' => 
@@ -133,6 +135,14 @@ class ComposerStaticInit4a48d6b2b30bb93b994b5113777d2b7e
         'MyCLabs\\Enum\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/php-enum/src',
+        ),
+        'MatthiasMullie\\PathConverter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/matthiasmullie/path-converter/src',
+        ),
+        'MatthiasMullie\\Minify\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/matthiasmullie/minify/src',
         ),
         'Matrix\\' => 
         array (

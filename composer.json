@@ -8,6 +8,7 @@
     ],
     "require": {
         "phpoffice/phpspreadsheet": "^1.18",
-        "chriskacerguis/codeigniter-restserver": "dev-master"
+        "chriskacerguis/codeigniter-restserver": "dev-master",
+        "matthiasmullie/minify": "^1.3"
     }
 }

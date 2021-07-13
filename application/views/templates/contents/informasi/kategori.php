@@ -7,7 +7,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <table id="dt_basic" class="table table-bordered table-striped">
+        <table id="dt_basic" class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
                     <th>Nama</th>
@@ -38,7 +38,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="nama"> Nama Kategori</label>
-                                <input type="text" class="form-control" id="nama" placeholder="Nama" required />
+                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama" required />
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="tanggal"> Tanggal</label>
-                                <input type="date" class="form-control" id="tanggal" placeholder="Tanggal" value="<?= Date("Y-m-d") ?>" required />
+                                <input type="date" class="form-control" id="tanggal" name="tanggal" placeholder="Tanggal" value="<?= Date("Y-m-d") ?>" required />
                             </div>
                         </div>
                     </div>

@@ -67,7 +67,7 @@ class Render_Controller extends CI_Controller
 			// Content
 			'plugin_styles' 	=> $this->plugin_styles,
 			'plugin_scripts' 	=> $this->plugin_scripts,
-			'title' 					=> $this->title,
+			'title' 				=> $this->title,
 			'title_show' 			=> $this->title_show,
 			'navigation' 			=> $this->navigationHtml($this->default->menu()),
 			'content' 				=> $this->content,
@@ -78,8 +78,9 @@ class Render_Controller extends CI_Controller
 	}
 
 
-	protected function output_json($data, $code = 200)
+	protected function output_json($data, $code = null)
 	{
+		$code = $code == null ? 200 : $code;
 		$this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode($data));
 		$this->output->set_status_header($code);
@@ -104,7 +105,7 @@ class Render_Controller extends CI_Controller
 		$this->app_name 		= $this->config->item('app_name');
 		$this->copyright 		= $this->config->item('copyright');
 		$this->page_setting 	= $this->config->item('page_setting');
-		$this->page_nav 	= $this->config->item('page_nav');
+		$this->page_nav 		= $this->config->item('page_nav');
 		$this->template_type 	= $this->config->item('template_type');
 
 		$this->load->library('plugin');

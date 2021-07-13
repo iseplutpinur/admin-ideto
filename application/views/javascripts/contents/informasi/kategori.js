@@ -42,6 +42,62 @@ $(function () {
         $('#id').val("");
         $('#nama').val("");
     });
+
+    // tambah dan ubah
+    $("#form").submit(function (ev) {
+        ev.preventDefault();
+        const form = new FormData(this);
+        $.LoadingOverlay("show");
+        $.ajax({
+            method: 'post',
+            url: '<?= base_url() ?>informasi/kategori/' + ($("#id").val() == "" ? 'insert' : 'update'),
+            data: form,
+            cache: false,
+            contentType: false,
+            processData: false,
+        }).done((data) => {
+            Toast.fire({
+                icon: 'success',
+                title: 'Data berhasil disimpan'
+            })
+            dynamic();
+        }).fail(($xhr) => {
+            Toast.fire({
+                icon: 'error',
+                title: 'Data gagal disimpan'
+            })
+        }).always(() => {
+            $.LoadingOverlay("hide");
+            $('#myModal').modal('toggle')
+        })
+    });
+
+    // hapus
+    $('#OkCheck').click(() => {
+        let id = $("#idCheck").val()
+        $.LoadingOverlay("show");
+        $.ajax({
+            method: 'post',
+            url: '<?= base_url() ?>informasi/kategori/delete',
+            data: {
+                id: id
+            }
+        }).done((data) => {
+            Toast.fire({
+                icon: 'success',
+                title: 'Data berhasil dihapus'
+            })
+            dynamic();
+        }).fail(($xhr) => {
+            Toast.fire({
+                icon: 'error',
+                title: 'Data gagal dihapus'
+            })
+        }).always(() => {
+            $('#ModalCheck').modal('toggle')
+            $.LoadingOverlay("hide");
+        })
+    })
 })
 
 // Click Hapus
