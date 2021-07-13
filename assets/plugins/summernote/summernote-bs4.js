@@ -268,6 +268,7 @@
               resizeQuarter: 'Resize quarter',
               resizeNone: 'Original size',
               floatLeft: 'Float Left',
+              floatCenter: 'Float Center',
               floatRight: 'Float Right',
               floatNone: 'Remove float',
               shapeRounded: 'Shape: Rounded',
@@ -5473,6 +5474,7 @@
             this.floatMe = this.wrapCommand(function (value) {
               var $target = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default()(_this.restoreTarget());
               $target.toggleClass('note-float-left', value === 'left');
+              $target.toggleClass('note-float-center', value === 'center');
               $target.toggleClass('note-float-right', value === 'right');
               $target.css('float', value === 'none' ? '' : value);
             });
@@ -7910,6 +7912,13 @@
                   click: _this3.context.createInvokeHandler('editor.floatMe', 'left')
                 }).render();
               });
+              this.context.memo('button.floatCenter', function () {
+                return _this3.button({
+                  contents: _this3.ui.icon(_this3.options.icons.floatCenter),
+                  tooltip: _this3.lang.image.floatCenter,
+                  click: _this3.context.createInvokeHandler('editor.floatMe', 'center')
+                }).render();
+              });
               this.context.memo('button.floatRight', function () {
                 return _this3.button({
                   contents: _this3.ui.icon(_this3.options.icons.floatRight),
@@ -9803,7 +9812,7 @@
             // popover
             popatmouse: true,
             popover: {
-              image: [['resize', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']], ['float', ['floatLeft', 'floatRight', 'floatNone']], ['remove', ['removeMedia']]],
+              image: [['resize', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']], ['float', ['floatLeft', 'floatCenter', 'floatRight', 'floatNone']], ['remove', ['removeMedia']]],
               link: [['link', ['linkDialogShow', 'unlink']]],
               table: [['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']], ['delete', ['deleteRow', 'deleteCol', 'deleteTable']]],
               air: [['color', ['color']], ['font', ['bold', 'underline', 'clear']], ['para', ['ul', 'paragraph']], ['table', ['table']], ['insert', ['link', 'picture']], ['view', ['fullscreen', 'codeview']]]
@@ -9978,6 +9987,7 @@
               'code': 'note-icon-code',
               'eraser': 'note-icon-eraser',
               'floatLeft': 'note-icon-float-left',
+              'floatCenter': 'note-icon-float-center',
               'floatRight': 'note-icon-float-right',
               'font': 'note-icon-font',
               'frame': 'note-icon-frame',

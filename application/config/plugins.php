@@ -52,9 +52,9 @@ $config['select2'] = [
 
 $config['summernote'] = [
 	'styles' => [
-		'assets/plugins/summernote/summernote-bs4.min.css'
+		'assets/plugins/summernote/summernote-bs4.css'
 	],
 	'scripts' => [
-		'assets/plugins/summernote/summernote-bs4.min.js'
+		'assets/plugins/summernote/summernote-bs4.js'
 	]
 ];

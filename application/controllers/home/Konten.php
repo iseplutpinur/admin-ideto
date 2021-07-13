@@ -41,6 +41,11 @@ class Konten extends Render_Controller
     public function uploadImage()
     {
         $path = $this->path;
+        // cek directory
+        if (!is_dir($path)) {
+            mkdir($path, 0755, TRUE);
+        }
+
         $config['upload_path']          = './' . $path;
         $config['allowed_types']        = 'gif|jpg|png|jpeg|JPG|PNG|JPEG';
         $config['overwrite']            = false;
