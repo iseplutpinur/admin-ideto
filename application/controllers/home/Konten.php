@@ -41,12 +41,19 @@ class Konten extends Render_Controller
 
         // list file in dir
         $this->load->helper('directory');
-        $files = directory_map($this->path, FALSE, TRUE);
-
-        foreach ($files as $file) {
-            if (!in_array($file, $gambars)) {
-                $this->deleteImage($this->path . $file);
+        $path = './' . $this->path;
+        $files = directory_map($path, FALSE, TRUE);
+        if ($files) {
+            foreach ($files as $file) {
+                if (!in_array($file, $gambars)) {
+                    $this->deleteImage($path . $file);
+                }
             }
+        }
+
+        // jika tidak ada gambar maka folder akan dihapus
+        if ($files == false || $gambars == false) {
+            rmdir($path);
         }
 
         $informasi_gambar = '';
@@ -60,7 +67,7 @@ class Konten extends Render_Controller
 
     public function uploadImage()
     {
-        $path = $this->path;
+        $path = './' . $this->path;
         // cek directory
         if (!is_dir($path)) {
             mkdir($path, 0755, TRUE);
@@ -75,7 +82,7 @@ class Konten extends Render_Controller
         $result = $this->upload->do_upload('image');
         if ($result) {
             $file_name = $this->upload->data("file_name");
-            $url = base_url($path) . $file_name;
+            $url = base_url($this->path) . $file_name;
             $this->output_json([
                 'url' => [
                     'status' => 1,
@@ -118,7 +125,7 @@ class Konten extends Render_Controller
         $this->load->model("home/KontenModel", 'model');
 
         // path
-        $this->path = './images/home/konten/';
+        $this->path = 'images/home/konten/';
     }
 }
 
