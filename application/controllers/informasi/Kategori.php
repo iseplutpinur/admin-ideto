@@ -16,7 +16,7 @@ class Kategori extends Render_Controller
         $this->breadcrumb_1_url = base_url();
         $this->breadcrumb_2 = 'Informasi';
         $this->breadcrumb_2_url = '#';
-        $this->breadcrumb_3 = 'List';
+        $this->breadcrumb_3 = 'Kategori';
         $this->breadcrumb_3_url = '#';
 
         // content

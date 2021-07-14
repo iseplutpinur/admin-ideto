@@ -62,6 +62,7 @@ class Ideto extends Render_Controller
         $gambars = $this->input->post('gambar');
         $folder = $this->input->post('folder');
         $deskripsi = $this->input->post('deskripsi', false);
+
         // list gambar yang dikirim
         $gambars = $gambars == null ? [] : $gambars;
         $list_gambar = '';
@@ -92,7 +93,9 @@ class Ideto extends Render_Controller
 
         // jika tidak ada gambar maka folder akan dihapus
         if ($files == false || $gambars == false) {
-            rmdir($path);
+            if (is_dir($path)) {
+                rmdir($path);
+            }
         }
     }
 

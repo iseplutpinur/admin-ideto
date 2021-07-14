@@ -1,15 +1,21 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2021 at 10:58 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 7.4.16
+-- Generation Time: Jul 14, 2021 at 02:03 AM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 7.4.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `ideto`
@@ -28,9 +34,21 @@ CREATE TABLE `informasi` (
   `deskripsi` text DEFAULT NULL,
   `gambar` varchar(250) DEFAULT NULL,
   `penulis` varchar(100) DEFAULT NULL,
-  `status` int(11) DEFAULT 1,
-  `tanggal` datetime DEFAULT NULL
+  `status` enum('Darft','Disimpan','Diterbitkan') NOT NULL DEFAULT 'Darft',
+  `tanggal` date DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `informasi`
+--
+
+INSERT INTO `informasi` (`id`, `id_kategori`, `judul`, `deskripsi`, `gambar`, `penulis`, `status`, `tanggal`, `created_at`, `updated_at`) VALUES
+(1, 8, 'Kategori', 'tes deskripsi', 'gambar', 'penulis', 'Disimpan', '2021-07-13', '2021-07-13 20:59:17', NULL),
+(7, 8, 'Termin 1', '<p><img src=\"http://localhost/aplikasi/pro/ideto/images/informasi/list/7/bajay2.png\" alt=\"bajay2.png\" style=\"width: 25%;\"><br></p>', '7.png||bajay2.png', '7', 'Disimpan', '2021-07-13', '2021-07-13 23:45:48', NULL),
+(8, 8, 'Testing Informasi', '<p>Indonesia merdeka</p>', '8.png|', 'Isep Lutpi Nur', 'Disimpan', '2021-07-13', '2021-07-13 23:55:46', NULL),
+(9, NULL, '', NULL, NULL, NULL, 'Darft', NULL, '2021-07-13 23:55:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -41,8 +59,43 @@ CREATE TABLE `informasi` (
 CREATE TABLE `kategori` (
   `id` int(11) NOT NULL,
   `nama` varchar(100) DEFAULT NULL,
-  `tanggal` datetime DEFAULT NULL
+  `tanggal` date DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kategori`
+--
+
+INSERT INTO `kategori` (`id`, `nama`, `tanggal`, `created_at`, `updated_at`) VALUES
+(8, 'Biasa', '2021-07-13', '2021-07-13 15:04:33', '2021-07-13 15:19:37'),
+(9, 'Penting', '2021-07-13', '2021-07-13 15:19:50', NULL),
+(10, 'Sangat Penting', '2021-07-13', '2021-07-13 15:19:57', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `keys`
+--
+
+CREATE TABLE `keys` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `key` varchar(40) NOT NULL,
+  `level` int(2) NOT NULL,
+  `ignore_limits` tinyint(1) NOT NULL DEFAULT 0,
+  `is_private_key` tinyint(1) NOT NULL DEFAULT 0,
+  `ip_addresses` text DEFAULT NULL,
+  `date_created` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `keys`
+--
+
+INSERT INTO `keys` (`id`, `user_id`, `key`, `level`, `ignore_limits`, `is_private_key`, `ip_addresses`, `date_created`) VALUES
+(1, 1, 'administrator', 1, 0, 0, NULL, 20210713);
 
 -- --------------------------------------------------------
 
@@ -60,15 +113,17 @@ CREATE TABLE `konten_about_ideto` (
   `sejarah_judul` varchar(100) DEFAULT NULL,
   `sejarah_deskripsi` text DEFAULT NULL,
   `sejarah_gambar` varchar(250) DEFAULT NULL,
-  `tanggal` datetime DEFAULT NULL
+  `tanggal` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `konten_about_ideto`
 --
 
-INSERT INTO `konten_about_ideto` (`id`, `slider_judul`, `slider_deskripsi`, `profil_judul`, `profil_deskripsi`, `profil_gambar`, `sejarah_judul`, `sejarah_deskripsi`, `sejarah_gambar`, `tanggal`) VALUES
-(1, 'Profile', 'Lorem', 'Profile judul', '<p><span xss=\"removed\" style=\"font-size: 24px;\">&nbsp;Testing 123 12</span><span style=\"font-size: 24px;\">﻿</span><br><img src=\"http://localhost/aplikasi/pro/ideto/images/about/ideto/bajay1.png\" alt=\"bajay1.png\" style=\"width: 25%; float: right;\" class=\"note-float-right\"></p>', NULL, 'Sejarah judul', '<p>123</p>', NULL, NULL);
+INSERT INTO `konten_about_ideto` (`id`, `slider_judul`, `slider_deskripsi`, `profil_judul`, `profil_deskripsi`, `profil_gambar`, `sejarah_judul`, `sejarah_deskripsi`, `sejarah_gambar`, `tanggal`, `created_at`, `updated_at`) VALUES
+(1, 'Membangun Peradaban dengan Menulis', 'Membangun Peradaban dengan Menulis', 'Profile judul', '<p><img src=\"http://localhost/aplikasi/pro/ideto/images/about/ideto/profile-deskripsi/Kata_Kata.png\" alt=\"Kata_Kata.png\" style=\"width: 50%;\"><br></p>', 'Kata_Kata.png', 'Sejarah judul', '<p><br></p>', '', NULL, '2021-07-12 09:13:59', '2021-07-13 20:31:03');
 
 -- --------------------------------------------------------
 
@@ -101,8 +156,17 @@ CREATE TABLE `konten_about_kebijakan` (
   `judul_7` varchar(100) DEFAULT NULL,
   `deskripsi_7` text DEFAULT NULL,
   `gambar_7` varchar(100) DEFAULT NULL,
-  `tanggal` datetime DEFAULT NULL
+  `tanggal` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `konten_about_kebijakan`
+--
+
+INSERT INTO `konten_about_kebijakan` (`id`, `slider_judul`, `slider_deskripsi`, `judul_1`, `deskripsi_1`, `gambar_1`, `judul_2`, `deskripsi_2`, `gambar_2`, `judul_3`, `deskripsi_3`, `gambar_3`, `judul_4`, `deskripsi_4`, `gambar_4`, `judul_5`, `deskripsi_5`, `gambar_5`, `judul_6`, `deskripsi_6`, `gambar_6`, `judul_7`, `deskripsi_7`, `gambar_7`, `tanggal`, `created_at`, `updated_at`) VALUES
+(2, '1', '1', 'judul 1', '<p>deskripsi 1</p>', NULL, 'judul 2', '<p>deskripsi 2</p>', NULL, 'judul 3', '<p>deskripsi 3</p>', NULL, 'judul 4', '<p>deskripsi 4</p>', NULL, 'judul 5', '<p>deskripsi 5</p>', NULL, 'judul 6', '<p>deskripsi 6</p>', NULL, 'judul 7', '<p>deskripsi 7</p>', NULL, NULL, '2021-07-12 09:14:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -126,8 +190,17 @@ CREATE TABLE `konten_about_lain_lain` (
   `judul_4` varchar(100) DEFAULT NULL,
   `deskripsi_4` text DEFAULT NULL,
   `gambar_4` varchar(100) DEFAULT NULL,
-  `tanggal` datetime DEFAULT NULL
+  `tanggal` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `konten_about_lain_lain`
+--
+
+INSERT INTO `konten_about_lain_lain` (`id`, `slider_judul`, `slider_deskripsi`, `judul_1`, `deskripsi_1`, `gambar_1`, `judul_2`, `deskripsi_2`, `gambar_2`, `judul_3`, `deskripsi_3`, `gambar_3`, `judul_4`, `deskripsi_4`, `gambar_4`, `tanggal`, `created_at`, `updated_at`) VALUES
+(1, '1', '1', '1', '<p>1</p>', NULL, '2', '<p>2</p>', NULL, '3', '<p>3</p>', NULL, '4', '<p>4</p>', NULL, NULL, '2021-07-12 09:14:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -139,8 +212,17 @@ CREATE TABLE `konten_about_penata_laksana` (
   `id` int(11) NOT NULL,
   `slider_judul` varchar(100) DEFAULT NULL,
   `slider_deskripsi` text DEFAULT NULL,
-  `tanggal` datetime DEFAULT NULL
+  `tanggal` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `konten_about_penata_laksana`
+--
+
+INSERT INTO `konten_about_penata_laksana` (`id`, `slider_judul`, `slider_deskripsi`, `tanggal`, `created_at`, `updated_at`) VALUES
+(3, 'asdas 21', 'asdasd 21312', NULL, '2021-07-12 09:14:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -170,8 +252,17 @@ CREATE TABLE `konten_about_penyerahan` (
   `judul_6` varchar(100) DEFAULT NULL,
   `deskripsi_6` text DEFAULT NULL,
   `gambar_6` varchar(100) DEFAULT NULL,
-  `tanggal` datetime DEFAULT NULL
+  `tanggal` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `konten_about_penyerahan`
+--
+
+INSERT INTO `konten_about_penyerahan` (`id`, `slider_judul`, `slider_deskripsi`, `judul_1`, `deskripsi_1`, `gambar_1`, `judul_2`, `deskripsi_2`, `gambar_2`, `judul_3`, `deskripsi_3`, `gambar_3`, `judul_4`, `deskripsi_4`, `gambar_4`, `judul_5`, `deskripsi_5`, `gambar_5`, `judul_6`, `deskripsi_6`, `gambar_6`, `tanggal`, `created_at`, `updated_at`) VALUES
+(1, '1', '1', '1', '<p>1</p>', NULL, '2', '<p>2</p>', NULL, '3', '<p>3</p>', NULL, '4', '<p>4</p>', NULL, '5', '<p>5</p>', NULL, '6', '<p>6</p>', NULL, NULL, '2021-07-12 09:14:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -183,8 +274,17 @@ CREATE TABLE `konten_arsip` (
   `id` int(11) NOT NULL,
   `slider_judul` varchar(100) DEFAULT NULL,
   `slider_deskripsi` text DEFAULT NULL,
-  `tanggal` datetime DEFAULT NULL
+  `tanggal` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `konten_arsip`
+--
+
+INSERT INTO `konten_arsip` (`id`, `slider_judul`, `slider_deskripsi`, `tanggal`, `created_at`, `updated_at`) VALUES
+(1, 'arsip 2', 'arsip 3', NULL, '2021-07-12 09:14:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -196,8 +296,17 @@ CREATE TABLE `konten_artikel` (
   `id` int(11) NOT NULL,
   `slider_judul` varchar(100) DEFAULT NULL,
   `slider_deskripsi` text DEFAULT NULL,
-  `tanggal` datetime DEFAULT NULL
+  `tanggal` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `konten_artikel`
+--
+
+INSERT INTO `konten_artikel` (`id`, `slider_judul`, `slider_deskripsi`, `tanggal`, `created_at`, `updated_at`) VALUES
+(1, 'artikel 1', 'artikel 2', NULL, '2021-07-12 09:14:55', NULL);
 
 -- --------------------------------------------------------
 
@@ -209,12 +318,19 @@ CREATE TABLE `konten_home` (
   `id` int(11) NOT NULL,
   `slider_judul` varchar(100) DEFAULT NULL,
   `slider_deskripsi` text DEFAULT NULL,
-  `slider_gambar` varchar(250) DEFAULT NULL,
   `informasi_judul` varchar(100) DEFAULT NULL,
   `informasi_deskripsi` text DEFAULT NULL,
-  `informasi_gambar` varchar(250) DEFAULT NULL,
-  `tanggal` datetime DEFAULT NULL
+  `informasi_gambar` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `konten_home`
+--
+
+INSERT INTO `konten_home` (`id`, `slider_judul`, `slider_deskripsi`, `informasi_judul`, `informasi_deskripsi`, `informasi_gambar`, `created_at`, `updated_at`) VALUES
+(3, NULL, NULL, NULL, NULL, 'bajay2.png', '2021-07-13 19:16:38', '2021-07-13 23:37:30');
 
 -- --------------------------------------------------------
 
@@ -226,8 +342,17 @@ CREATE TABLE `konten_informasi` (
   `id` int(11) NOT NULL,
   `slider_judul` varchar(100) DEFAULT NULL,
   `slider_deskripsi` text DEFAULT NULL,
-  `tanggal` datetime DEFAULT NULL
+  `tanggal` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `konten_informasi`
+--
+
+INSERT INTO `konten_informasi` (`id`, `slider_judul`, `slider_deskripsi`, `tanggal`, `created_at`, `updated_at`) VALUES
+(1, '2', '2', NULL, '2021-07-12 09:15:17', NULL);
 
 -- --------------------------------------------------------
 
@@ -239,7 +364,9 @@ CREATE TABLE `konten_pencarian` (
   `id` int(11) NOT NULL,
   `slider_judul` varchar(100) DEFAULT NULL,
   `slider_deskripsi` text DEFAULT NULL,
-  `tanggal` datetime DEFAULT NULL
+  `tanggal` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -255,7 +382,9 @@ CREATE TABLE `konten_utama` (
   `kata_pencarian` text DEFAULT NULL,
   `link` varchar(100) DEFAULT NULL,
   `copyright` varchar(100) DEFAULT NULL,
-  `tanggal` datetime DEFAULT NULL
+  `tanggal` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -277,7 +406,8 @@ CREATE TABLE `level` (
 --
 
 INSERT INTO `level` (`lev_id`, `lev_nama`, `lev_keterangan`, `lev_status`, `created_at`) VALUES
-(1, 'Administrator', '-', 'Aktif', '2020-06-18 09:40:31');
+(1, 'Administrator', '-', 'Aktif', '2020-06-18 09:40:31'),
+(9, 'Review', '-', 'Aktif', '2021-07-09 02:55:18');
 
 -- --------------------------------------------------------
 
@@ -309,12 +439,22 @@ INSERT INTO `menu` (`menu_id`, `menu_menu_id`, `menu_nama`, `menu_keterangan`, `
 (5, 2, 'Level', '-', 3, 'far fa-circle', 'pengaturan/level', 'Aktif', '2020-06-18 09:40:07'),
 (6, 2, 'Pengguna', '-', 4, 'far fa-circle', 'pengaturan/pengguna', 'Aktif', '2020-06-18 09:40:07'),
 (64, 0, 'Ganti Password', 'Ganti password', 99, 'fa fa-key', 'pengaturan/password', 'Aktif', '2021-06-28 15:34:14'),
-(69, 0, 'About', '-', 2, 'fas fa-address-card', '#', 'Aktif', '2021-07-08 13:38:35'),
-(70, 69, 'Ideto', '-', 1, ' far fa-circle', 'about/ideto', 'Aktif', '2021-07-08 13:42:47'),
-(71, 69, 'Penata Laksana', '-', 2, 'far fa-circle', 'about/penatalaksana', 'Aktif', '2021-07-08 13:44:03'),
-(72, 69, 'Penyerahan', '-', 4, 'far fa-circle', 'about/penyerahan', 'Aktif', '2021-07-08 13:45:10'),
-(73, 69, 'Kebijakan', '-', 3, 'far fa-circle', 'about/kebijakan', 'Aktif', '2021-07-08 13:46:11'),
-(74, 69, 'Lain-Lain', '-', 5, 'far fa-circle', 'about/lainlain', 'Aktif', '2021-07-08 13:46:36');
+(69, 0, 'About', '-', 3, 'fas fa-address-card', '#', 'Aktif', '2021-07-08 13:38:35'),
+(70, 69, 'Konten Ideto', '-', 1, ' far fa-circle', 'about/ideto', 'Aktif', '2021-07-08 13:42:47'),
+(71, 69, 'Konten Penata Laksana', '-', 2, 'far fa-circle', 'about/penataLaksana', 'Aktif', '2021-07-08 13:44:03'),
+(72, 69, 'Konten Penyerahan', '-', 4, 'far fa-circle', 'about/penyerahan', 'Aktif', '2021-07-08 13:45:10'),
+(73, 69, 'Konten Kebijakan', '-', 3, 'far fa-circle', 'about/kebijakan', 'Aktif', '2021-07-08 13:46:11'),
+(74, 69, 'Konten Lain-Lain', '-', 5, 'far fa-circle', 'about/lainLain', 'Aktif', '2021-07-08 13:46:36'),
+(75, 0, 'Home', '-', 2, 'fa fa-home', '#', 'Aktif', '2021-07-09 02:20:41'),
+(76, 75, 'Konten Home', '-', 1, 'far fa-circle', 'home/konten', 'Aktif', '2021-07-09 02:22:08'),
+(77, 0, 'Artikel', '-', 4, 'fa fa-book', '#', 'Aktif', '2021-07-09 02:32:30'),
+(78, 77, 'Konten Artikel', '-', 1, 'fa fa-circle', 'artikel/konten', 'Aktif', '2021-07-09 02:33:14'),
+(79, 0, 'Arsip', '-', 5, 'fa fa-archive', '#', 'Aktif', '2021-07-09 02:34:24'),
+(80, 79, 'Konten Arsip', '-', 1, 'fa fa-circle', 'arsip/konten', 'Aktif', '2021-07-09 02:34:42'),
+(81, 0, 'Informasi', '-', 6, 'fa fa-info', '#', 'Aktif', '2021-07-09 02:47:40'),
+(82, 81, 'Konten Informasi', '-', 1, 'fa fa-circle', 'informasi/konten', 'Aktif', '2021-07-09 02:48:14'),
+(83, 81, 'List Informasi', '-', 2, 'fa fa-circle', 'informasi/listInformasi', 'Aktif', '2021-07-09 02:53:19'),
+(84, 81, 'Kategori', '-', 3, 'far fa-circle', 'informasi/kategori', 'Aktif', '2021-07-12 09:02:37');
 
 -- --------------------------------------------------------
 
@@ -368,7 +508,17 @@ INSERT INTO `role_aplikasi` (`rola_id`, `rola_menu_id`, `rola_lev_id`, `created_
 (106, 71, 1, '2021-07-08 13:48:24'),
 (107, 72, 1, '2021-07-08 13:48:31'),
 (109, 73, 1, '2021-07-08 13:49:21'),
-(110, 74, 1, '2021-07-08 13:49:32');
+(110, 74, 1, '2021-07-08 13:49:32'),
+(111, 75, 1, '2021-07-09 02:20:49'),
+(112, 76, 1, '2021-07-09 02:22:17'),
+(113, 77, 1, '2021-07-09 02:33:27'),
+(114, 78, 1, '2021-07-09 02:33:33'),
+(115, 79, 1, '2021-07-09 02:34:51'),
+(116, 80, 1, '2021-07-09 02:34:58'),
+(117, 81, 1, '2021-07-09 02:48:25'),
+(118, 82, 1, '2021-07-09 02:48:33'),
+(119, 83, 1, '2021-07-09 02:53:31'),
+(120, 84, 1, '2021-07-12 09:03:05');
 
 -- --------------------------------------------------------
 
@@ -448,6 +598,12 @@ ALTER TABLE `informasi`
 -- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `keys`
+--
+ALTER TABLE `keys`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -569,13 +725,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `informasi`
 --
 ALTER TABLE `informasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `keys`
+--
+ALTER TABLE `keys`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `konten_about_ideto`
@@ -587,49 +749,49 @@ ALTER TABLE `konten_about_ideto`
 -- AUTO_INCREMENT for table `konten_about_kebijakan`
 --
 ALTER TABLE `konten_about_kebijakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `konten_about_lain_lain`
 --
 ALTER TABLE `konten_about_lain_lain`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `konten_about_penata_laksana`
 --
 ALTER TABLE `konten_about_penata_laksana`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `konten_about_penyerahan`
 --
 ALTER TABLE `konten_about_penyerahan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `konten_arsip`
 --
 ALTER TABLE `konten_arsip`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `konten_artikel`
 --
 ALTER TABLE `konten_artikel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `konten_home`
 --
 ALTER TABLE `konten_home`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `konten_informasi`
 --
 ALTER TABLE `konten_informasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `konten_pencarian`
@@ -647,13 +809,13 @@ ALTER TABLE `konten_utama`
 -- AUTO_INCREMENT for table `level`
 --
 ALTER TABLE `level`
-  MODIFY `lev_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `lev_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `pengguna`
@@ -665,7 +827,7 @@ ALTER TABLE `pengguna`
 -- AUTO_INCREMENT for table `role_aplikasi`
 --
 ALTER TABLE `role_aplikasi`
-  MODIFY `rola_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `rola_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `role_users`
@@ -685,3 +847,7 @@ ALTER TABLE `tokens`
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=338;
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

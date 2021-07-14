@@ -53,7 +53,9 @@ class Konten extends Render_Controller
 
         // jika tidak ada gambar maka folder akan dihapus
         if ($files == false || $gambars == false) {
-            rmdir($path);
+            if (is_dir($path)) {
+                rmdir($path);
+            }
         }
 
         $informasi_gambar = '';
